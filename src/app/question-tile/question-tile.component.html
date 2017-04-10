@@ -1,0 +1,4 @@
+<h4>{{question.text}}</h4>
+<ul>
+  <li *ngFor="let answer of question.answers" [ngClass]="{'selected-answer': answer.correct}">{{answer.text}}</li>
+</ul>

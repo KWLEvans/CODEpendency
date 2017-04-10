@@ -2,7 +2,8 @@ import { ModuleWithProviders }  from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { HomeComponent } from './home/home.component';
-import { QuestionFormComponent } from './question-form/question-form.component';
+import { NewDeckComponent } from './new-deck/new-deck.component';
+import { DeckManagerComponent } from './deck-manager/deck-manager.component';
 
 const appRoutes: Routes = [
   {
@@ -10,8 +11,12 @@ const appRoutes: Routes = [
     component: HomeComponent
   },
   {
-    path: 'create',
-    component: QuestionFormComponent
+    path: 'new-deck',
+    component: NewDeckComponent
+  },
+  {
+    path: 'decks/:id',
+    component: DeckManagerComponent
   }
 ];
 

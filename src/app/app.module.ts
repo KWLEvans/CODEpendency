@@ -9,6 +9,10 @@ import { masterFirebaseConfig } from './api-keys';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { QuestionFormComponent } from './question-form/question-form.component';
+import { DeckManagerComponent } from './deck-manager/deck-manager.component';
+import { QuestionTileComponent } from './question-tile/question-tile.component';
+import { DeckIdPipe } from './deck-id.pipe';
+import { NewDeckComponent } from './new-deck/new-deck.component';
 
 export const firebaseConfig = {
   apiKey: masterFirebaseConfig.apiKey,
@@ -21,7 +25,11 @@ export const firebaseConfig = {
   declarations: [
     AppComponent,
     HomeComponent,
-    QuestionFormComponent
+    QuestionFormComponent,
+    DeckManagerComponent,
+    QuestionTileComponent,
+    DeckIdPipe,
+    NewDeckComponent
   ],
   imports: [
     BrowserModule,

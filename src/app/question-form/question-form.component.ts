@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 import { Answer } from './../answer.model';
 import { Question } from './../question.model';
@@ -11,13 +11,14 @@ import { QuestionService } from './../question.service';
   providers: [ QuestionService ]
 })
 export class QuestionFormComponent implements OnInit {
+  @Input() deckId: string;
   question: Question;
   answered: boolean = false;
 
   constructor(private questionService: QuestionService) { }
 
   ngOnInit() {
-    this.question = new Question("", "Author", "Deck Name", [], []);
+    this.question = new Question("", "", [], []);
   }
 
   appendTag(tagToAppend: string) {
@@ -73,8 +74,9 @@ export class QuestionFormComponent implements OnInit {
   }
 
   submitForm(question: Question) {
+    question.deck = this.deckId;
     this.questionService.saveQuestion(question);
-    this.question = new Question("", "Author", "Deck Name", [], []);
+    this.question = new Question("", "", [], []);
   }
 
 }
