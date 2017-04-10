@@ -27,15 +27,21 @@
     <div [hidden]="question.tags.length > 0" class="alert alert-danger">
       Tags are required
     </div>
-    <ul>
-      <li *ngFor="let tag of question.tags" (click)="removeTag(tag)">{{tag}}</li>
-    </ul>
 
-    <label for="answer">Answer:</label>
-    <input #answer id="answer" name="answer" class="form-control" required>
-    <button (click)="appendAnswer(answer.value); answer.value=''" type="button" class="btn btn-success">Add Answer</button>
-    <div [hidden]="question.answers.length === 4" class="alert alert-danger">
-      You must submit four possible answers
+    <div *ngIf="question.tags.length > 0">
+      <h4>Tags:</h4>
+      <ul>
+        <li *ngFor="let tag of question.tags" (click)="removeTag(tag)">{{tag}}</li>
+      </ul>
+    </div>
+
+    <div *ngIf="question.answers.length !== 4">
+      <label for="answer">Answer:</label>
+      <input #answer id="answer" name="answer" class="form-control" required>
+      <button (click)="appendAnswer(answer.value); answer.value=''" type="button" class="btn btn-success">Add Answer</button>
+      <div [hidden]="question.answers.length === 4" class="alert alert-danger">
+        You must submit four possible answers
+      </div>
     </div>
 
     <div *ngIf="question.answers.length > 0">
