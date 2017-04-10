@@ -1,0 +1,50 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3>Add a Question</h3>
+  </div>
+  <div class="panel-body form-group">
+    <form (ngSubmit)="submitForm(question); questionForm.resetForm(); tagSelect.value = ''" #questionForm="ngForm">
+    <label for="text">Question:</label>
+    <input [(ngModel)]="question.text" #text="ngModel" id="text" name="text" class="form-control" required>
+    <div [hidden]="text.valid" class="alert alert-danger">
+      Question is required
+    </div>
+
+    <label for="tags">Tags:</label>
+    <select (change)="appendTag($event.target.value); tagSelect.value=''" #tagSelect id="tags" name="tags" class="form-control" required>
+      <option value='' disabled>Add Tags</option>
+      <option value="General">General</option>
+      <option value="HTML">HTML</option>
+      <option value="CSS">CSS</option>
+      <option value="JavaScript">JavaScript</option>
+      <option value="Ember.js">Ember.js</option>
+      <option value="Angular.js">Angular.js</option>
+      <option value="PHP">PHP</option>
+      <option value="Silex">Silex</option>
+      <option value="Drupal">Drupal</option>
+      <option value="SQL">SQL</option>
+    </select>
+    <div [hidden]="question.tags.length > 0" class="alert alert-danger">
+      Tags are required
+    </div>
+    <ul>
+      <li *ngFor="let tag of question.tags" (click)="removeTag(tag)">{{tag}}</li>
+    </ul>
+
+    <label for="answer">Answer:</label>
+    <input #answer id="answer" name="answer" class="form-control" required>
+    <button (click)="appendAnswer(answer.value); answer.value=''" type="button" class="btn btn-success">Add Answer</button>
+    <div [hidden]="question.answers.length === 4" class="alert alert-danger">
+      You must submit four possible answers
+    </div>
+    <ul id="answers">
+      <li *ngFor="let answer of question.answers" (click)="removeAnswer(answer)">{{answer}}</li>
+    </ul>
+
+    <button class="btn btn-success" type="submit" [disabled]="(!questionForm.form.valid || question.tags.length < 1) || question.answers.length !== 4">
+      Add Question
+    </button>
+
+    </form>
+  </div>
+</div>

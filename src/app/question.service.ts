@@ -14,4 +14,7 @@ export class QuestionService {
     return this.questions;
   }
 
+  saveQuestion(question: Question) {
+    this.questions.push(question);
+  }
 }
