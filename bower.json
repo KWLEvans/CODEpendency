@@ -1,0 +1,17 @@
+{
+  "name": "CODEpendency",
+  "description": "",
+  "main": "",
+  "authors": [
+    "jennifer beem <thebeemteam.boss>"
+  ],
+  "license": "MIT",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
