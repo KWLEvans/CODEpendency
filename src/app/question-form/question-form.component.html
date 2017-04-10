@@ -37,11 +37,18 @@
     <div [hidden]="question.answers.length === 4" class="alert alert-danger">
       You must submit four possible answers
     </div>
-    <ul id="answers">
-      <li *ngFor="let answer of question.answers" (click)="removeAnswer(answer)">{{answer}}</li>
-    </ul>
 
-    <button class="btn btn-success" type="submit" [disabled]="(!questionForm.form.valid || question.tags.length < 1) || question.answers.length !== 4">
+    <div *ngIf="question.answers.length > 0">
+      <h4>Click an answer to mark it as correct</h4>
+      <ul id="answers">
+        <li *ngFor="let answer of question.answers" [ngClass]="{'selected-answer': answer.correct}" (click)="selectAnswer(answer)">{{answer.text}}<button type="button" (click)="removeAnswer(answer)" class="btn btn-danger">Remove</button></li>
+      </ul>
+      <div [hidden]="answered" class="alert alert-danger">
+        You must select a correct answer
+      </div>
+    </div>
+
+    <button class="btn btn-success" type="submit" [disabled]="(!questionForm.form.valid || question.tags.length < 1) || question.answers.length !== 4 || !answered">
       Add Question
     </button>
 

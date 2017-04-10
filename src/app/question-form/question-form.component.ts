@@ -12,6 +12,7 @@ import { QuestionService } from './../question.service';
 })
 export class QuestionFormComponent implements OnInit {
   question: Question;
+  answered: boolean = false;
 
   constructor(private questionService: QuestionService) { }
 
@@ -34,17 +35,39 @@ export class QuestionFormComponent implements OnInit {
     });
   }
 
-  appendAnswer(answerToAppend: string) {
-    if (!this.question.answers.includes(answerToAppend)) {
-      this.question.answers.push(answerToAppend);
+  appendAnswer(answerText: string) {
+    let repeat = false;
+    this.question.answers.forEach(answer => {
+      if (answer.text === answerText) {
+        repeat = true;
+      }
+    });
+
+    if (!repeat) {
+      let newAnswer = new Answer(answerText, false);
+      this.question.answers.push(newAnswer);
     }
   }
 
-  removeAnswer(answerToRemove: string) {
+  removeAnswer(answerToRemove: Answer) {
     this.question.answers.forEach(answer => {
       if (answer === answerToRemove) {
+        if (answer.correct === true) {
+          this.answered = false;
+        }
         let index = this.question.answers.indexOf(answer);
         this.question.answers.splice(index, 1);
+      }
+    });
+  }
+
+  selectAnswer(answerToSelect: Answer) {
+    this.answered = true;
+    this.question.answers.forEach(answer => {
+      if (answer === answerToSelect) {
+        answer.correct = true;
+      } else {
+        answer.correct = false;
       }
     });
   }
