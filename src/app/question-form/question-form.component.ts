@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Deck } from './../deck.model';
 import { DeckService } from './../deck.service';
 import { Answer } from './../answer.model';
+
 import { Question } from './../question.model';
 import { QuestionService } from './../question.service';
 import { AuthService } from './../providers/auth.service';
@@ -15,14 +16,17 @@ import { Router } from '@angular/router';
 })
 export class QuestionFormComponent implements OnInit {
   @Input() deckId: string;
-  question: Question;
+  @Input() questionToEdit;
+
   answered: boolean = false;
   deckAuthor: string;
   currentDeck;
+  question;
 
   constructor(private questionService: QuestionService, private authService: AuthService, private router: Router, private deckService: DeckService) {  }
 
   ngOnInit() {
+
     this.authService.af.auth.subscribe(
       (auth) => {
         if (auth == null) {
@@ -35,7 +39,12 @@ export class QuestionFormComponent implements OnInit {
         }
       }
     );
-    this.question = new Question("", "", [], []);
+
+    if (this.questionToEdit) {
+      this.question = this.questionToEdit;
+    } else {
+      this.question = new Question("", "", [], "")
+    }
   }
 
 
@@ -54,56 +63,23 @@ export class QuestionFormComponent implements OnInit {
     });
   }
 
-  appendAnswer(answerText: string) {
-    let repeat = false;
-    this.question.answers.forEach(answer => {
-      if (answer.text === answerText) {
-        repeat = true;
-      }
+  submitForm(question) {
+
+    this.deckService.getDeckById(this.deckId).subscribe(returnedDeck => {
+      this.currentDeck = returnedDeck;
     });
-
-    if (!repeat) {
-      let newAnswer = new Answer(answerText, false);
-      this.question.answers.push(newAnswer);
-    }
-  }
-
-  removeAnswer(answerToRemove: Answer) {
-    this.question.answers.forEach(answer => {
-      if (answer === answerToRemove) {
-        if (answer.correct === true) {
-          this.answered = false;
-        }
-        let index = this.question.answers.indexOf(answer);
-        this.question.answers.splice(index, 1);
-      }
-    });
-  }
-
-  selectAnswer(answerToSelect: Answer) {
-    this.answered = true;
-    this.question.answers.forEach(answer => {
-      if (answer === answerToSelect) {
-        answer.correct = true;
+    if(this.currentDeck.author === this.deckAuthor)
+    {
+      if (this.questionToEdit) {
+        this.questionService.updateQuestion(question);
       } else {
-        answer.correct = false;
-      }
-    });
-  }
-
-  submitForm(question: Question) {
-
-      this.deckService.getDeckById(this.deckId).subscribe(returnedDeck => {
-        this.currentDeck = returnedDeck;
-      });
-      if(this.currentDeck.author === this.deckAuthor){
         question.deck = this.deckId;
         question.authorId = this.deckAuthor;
         this.questionService.saveQuestion(question);
-        this.question = new Question("", "", [], []);
-      } else {
-        alert("deck author does not match currently logged author");
       }
+      this.question = new Question("", "", [], "");
+    } else {
+      alert("deck author does not match currently logged author");
+    }
   }
-
 }

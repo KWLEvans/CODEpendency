@@ -1,4 +1,6 @@
-<h4>{{question.text}}</h4>
-<ul>
-  <li *ngFor="let answer of question.answers" [ngClass]="{'selected-answer': answer.correct}">{{answer.text}}</li>
-</ul>
+<div class="well">
+  <h4><strong>Q: </strong>{{question.text}}</h4>
+  <h4><strong>A: </strong>{{question.answer}}</h4>
+  <button (click)="editMode = true" class="btn btn-warning">Edit Question</button>
+</div>
+<app-question-form *ngIf="editMode" [questionToEdit]="question"></app-question-form>

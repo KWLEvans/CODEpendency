@@ -6,6 +6,7 @@ import { routing } from './app.routing';
 import { AngularFireModule } from 'angularfire2';
 import { masterFirebaseConfig } from './api-keys';
 import { AuthService } from './providers/auth.service';
+
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { QuestionFormComponent } from './question-form/question-form.component';
@@ -13,6 +14,9 @@ import { DeckManagerComponent } from './deck-manager/deck-manager.component';
 import { QuestionTileComponent } from './question-tile/question-tile.component';
 import { DeckIdPipe } from './deck-id.pipe';
 import { NewDeckComponent } from './new-deck/new-deck.component';
+import { FlashCardComponent } from './flash-card/flash-card.component';
+import { StudyComponent } from './study/study.component';
+import { TagPipe } from './tag.pipe';
 import { LoginPageComponent } from './login-page/login-page.component';
 
 export const firebaseConfig = {
@@ -31,6 +35,9 @@ export const firebaseConfig = {
     QuestionTileComponent,
     DeckIdPipe,
     NewDeckComponent,
+    FlashCardComponent,
+    StudyComponent,
+    TagPipe,
     LoginPageComponent
   ],
   imports: [
