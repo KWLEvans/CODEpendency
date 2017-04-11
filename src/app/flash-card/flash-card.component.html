@@ -1,10 +1,13 @@
-<div class="container">
-  <div [hidden]="flipped" (click)="flipped = true" class="well">
+<div class="flip-container container" (click)="this.classList.toggle('hover');">
+  <div class="flipper">
+
+  <div class="front">
     <h2>{{question.text}}</h2>
   </div>
-  <div [hidden]="!flipped" class="well">
+  <div class="back">
     <h2>{{question.answer}}</h2>
     <button class="btn btn-success" (click)="rightAnswer(); flipped = false;">Right</button>
     <button class="btn btn-danger" (click)="wrongAnswer(); flipped = false;">Wrong</button>
   </div>
+</div>
 </div>
