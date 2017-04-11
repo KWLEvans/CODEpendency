@@ -5,6 +5,7 @@ import { HttpModule } from '@angular/http';
 import { routing } from './app.routing';
 import { AngularFireModule } from 'angularfire2';
 import { masterFirebaseConfig } from './api-keys';
+import { AuthService } from './providers/auth.service';
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
@@ -16,6 +17,7 @@ import { NewDeckComponent } from './new-deck/new-deck.component';
 import { FlashCardComponent } from './flash-card/flash-card.component';
 import { StudyComponent } from './study/study.component';
 import { TagPipe } from './tag.pipe';
+import { LoginPageComponent } from './login-page/login-page.component';
 
 export const firebaseConfig = {
   apiKey: masterFirebaseConfig.apiKey,
@@ -35,7 +37,8 @@ export const firebaseConfig = {
     NewDeckComponent,
     FlashCardComponent,
     StudyComponent,
-    TagPipe
+    TagPipe,
+    LoginPageComponent
   ],
   imports: [
     BrowserModule,
@@ -44,7 +47,7 @@ export const firebaseConfig = {
     routing,
     AngularFireModule.initializeApp(firebaseConfig)
   ],
-  providers: [],
+  providers: [AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
