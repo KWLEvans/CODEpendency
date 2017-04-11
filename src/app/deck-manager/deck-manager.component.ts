@@ -19,6 +19,7 @@ export class DeckManagerComponent implements OnInit {
   deckId: string = '';
   deck: FirebaseObjectObservable<any>;
   questions: FirebaseListObservable<any[]>;
+  editDeck: boolean = false;
 
   constructor(private deckService: DeckService, private questionService: QuestionService, private route: ActivatedRoute, private location: Location) { }
 
@@ -29,6 +30,5 @@ export class DeckManagerComponent implements OnInit {
     this.deck = this.deckService.getDeckById(this.deckId);
     this.questions = this.questionService.getQuestions();
   }
-
 
 }
