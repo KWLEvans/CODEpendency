@@ -1,4 +1,7 @@
 <h2>Manage {{(deck | async)?.name}}</h2>
 
 <app-question-form [deckId]="(deck | async)?.$key"></app-question-form>
-<app-question-tile *ngFor="let question of questions | async | deckId:deckId" [question]="question"></app-question-tile>
+<div *ngIf="questions">
+  <h3>Questions:</h3>
+  <app-question-tile *ngFor="let question of questions | async | deckId:deckId" [question]="question"></app-question-tile>
+</div>

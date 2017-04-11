@@ -14,12 +14,12 @@ export class DeckService {
     return this.decks;
   }
 
+  getDeckById(deckId: string) {
+    return this.angularFire.database.object('decks/' + deckId);
+  }
+
   saveDeck(deck: Deck) {
     let newRef = this.decks.push(deck);
     return newRef.key;
-  }
-
-  getDeckById(deckId: string) {
-    return this.angularFire.database.object('decks/' + deckId);
   }
 }
