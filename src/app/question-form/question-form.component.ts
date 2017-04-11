@@ -18,7 +18,7 @@ export class QuestionFormComponent implements OnInit {
   question: Question;
   answered: boolean = false;
   deckAuthor: string;
-  currentDeck: Deck;
+  currentDeck;
 
   constructor(private questionService: QuestionService, private authService: AuthService, private router: Router, private deckService: DeckService) {  }
 
@@ -93,10 +93,17 @@ export class QuestionFormComponent implements OnInit {
 
   submitForm(question: Question) {
 
-      question.deck = this.deckId;
-      question.authorId = this.deckAuthor;
-      this.questionService.saveQuestion(question);
-      this.question = new Question("", "", [], []);
+      this.deckService.getDeckById(this.deckId).subscribe(returnedDeck => {
+        this.currentDeck = returnedDeck;
+      });
+      if(this.currentDeck.author === this.deckAuthor){
+        question.deck = this.deckId;
+        question.authorId = this.deckAuthor;
+        this.questionService.saveQuestion(question);
+        this.question = new Question("", "", [], []);
+      } else {
+        alert("deck author does not match currently logged author");
+      }
   }
 
 }
