@@ -20,6 +20,4 @@ export class AuthService {
     this.currentUserName = null;
     return this.af.auth.logout();
   }
-
-
 }
