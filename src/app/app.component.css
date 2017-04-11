@@ -1,0 +1,50 @@
+body {
+  background-color: #011E26;
+}
+
+#header {
+  margin-top: 50px;
+}
+
+.row-centered {
+  text-align: center;
+}
+
+.col-centered {
+  display: inline-block;
+  float: none;
+  text-align: left;
+  margin-right: -4px;
+}
+
+hr {
+  border-color: grey;
+}
+
+#middle-row {
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
+#login {
+  font-family: "Helvetica", Helvetica, sans-serif;
+  color: white;
+  font-size: 2em;
+  text-align: center;
+}
+
+.icon {
+  height: 70%;
+  width: 70%;
+  
+}
+
+#header {
+  height: 120%;
+  width: 100%;
+}
+
+.icon-div {
+  background-color: white;
+  border-radius: 5px;
+}
