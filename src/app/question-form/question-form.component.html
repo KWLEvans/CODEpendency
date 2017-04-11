@@ -1,6 +1,6 @@
 <div class="panel panel-default">
   <div class="panel-heading">
-    <h3>Add a Question</h3>
+    <h3><span *ngIf="!questionToEdit">Add a Question</span><span *ngIf="questionToEdit">Edit Question</span></h3>
   </div>
   <div class="panel-body form-group">
     <form (ngSubmit)="submitForm(question); questionForm.resetForm(); tagSelect.value = ''" #questionForm="ngForm">
@@ -41,9 +41,7 @@
       An answer is required
     </div>
 
-    <button class="btn btn-success" type="submit" [disabled]="(!questionForm.form.valid || question.tags.length < 1)">
-      Add Question
-    </button>
+    <button class="btn btn-success" type="submit" [disabled]="(!questionForm.form.valid || question.tags.length < 1)"><span *ngIf="!questionToEdit">Add Question</span><span *ngIf="questionToEdit">Done Editing</span></button>
 
     </form>
   </div>

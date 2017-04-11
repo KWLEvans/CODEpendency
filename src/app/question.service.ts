@@ -17,4 +17,17 @@ export class QuestionService {
   saveQuestion(question: Question) {
     this.questions.push(question);
   }
+
+  getQuestionById(questionId: string) {
+    return this.angularFire.database.object('questions/' + questionId);
+  }
+
+  updateQuestion(questionUpdater) {
+    let questionToUpdate = this.getQuestionById(questionUpdater.$key);
+    questionToUpdate.update({
+      text: questionUpdater.text,
+      tags: questionUpdater.tags,
+      answer: questionUpdater.answer
+    });
+  }
 }

@@ -11,12 +11,17 @@ import { QuestionService } from './../question.service';
 })
 export class QuestionFormComponent implements OnInit {
   @Input() deckId: string;
-  question: Question;
+  @Input() questionToEdit;
+  question;
 
   constructor(private questionService: QuestionService) { }
 
   ngOnInit() {
-    this.question = new Question("", "", [], "");
+    if (this.questionToEdit) {
+      this.question = this.questionToEdit;
+    } else {
+      this.question = new Question("", "", [], "")
+    }
   }
 
   appendTag(tagToAppend: string) {
@@ -34,9 +39,13 @@ export class QuestionFormComponent implements OnInit {
     });
   }
 
-  submitForm(question: Question) {
-    question.deck = this.deckId;
-    this.questionService.saveQuestion(question);
+  submitForm(question) {
+    if (this.questionToEdit) {
+      this.questionService.updateQuestion(question);
+    } else {
+      question.deck = this.deckId;
+      this.questionService.saveQuestion(question);
+    }
     this.question = new Question("", "", [], "");
   }
 
