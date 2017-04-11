@@ -1,7 +1,18 @@
+<nav class="navbar navbar-default navbar-fixed-top">
+  <div class="navbar-header" *ngIf="isLoggedIn">
+    <h1>CODEpendent</h1>
+    <ul class="nav navbar-nav">
+      <li><a routerLink="">Home</a></li>
+      <li><a routerLink="new-deck">New Deck</a></li>
+    </ul>
+    <p class="navbar-text navbar-right">Logged In: {{user_displayName}} ({{user_email}})<p>
+      <p><button class="btn btn-default" (click)="logout()">Logout</button></p>
+    </div>
+    <div *ngIf="!isLoggedIn">
+      <p class="navbar-text navbar-right">Logged Out</p>
+    </div>
+</nav>
+<hr>
 <div class="container">
-  <h1>CODEpendent</h1>
-  <hr>
-  <a routerLink="">Home</a>
-  <a routerLink="new-deck">New Deck</a>
-  <router-outlet></router-outlet>
+<router-outlet></router-outlet>
 </div>
