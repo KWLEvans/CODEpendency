@@ -10,3 +10,7 @@
 .selected-answer {
   background-color: green;
 }
+
+body{
+  padding-top: 3em;
+}
