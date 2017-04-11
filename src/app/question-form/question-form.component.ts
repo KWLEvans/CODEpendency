@@ -1,7 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Deck } from './../deck.model';
 import { DeckService } from './../deck.service';
-import { Answer } from './../answer.model';
 
 import { Question } from './../question.model';
 import { QuestionService } from './../question.service';
