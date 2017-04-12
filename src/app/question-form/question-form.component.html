@@ -1,49 +1,42 @@
-<h1>{{deckId}}</h1>
-<div class="panel panel-default">
-  <div class="panel-heading">
-    <h3><span *ngIf="!questionToEdit">Add a Question</span><span *ngIf="questionToEdit">Edit Question</span></h3>
+<h3><span *ngIf="!questionToEdit">Add a Question</span><span *ngIf="questionToEdit">Edit Question</span></h3>
+<form (ngSubmit)="submitForm(question); questionForm.resetForm(); tagSelect.value = ''" #questionForm="ngForm">
+  <label for="text">Question:</label>
+  <input [(ngModel)]="question.text" #text="ngModel" id="text" name="text" class="form-control" required>
+  <div [hidden]="text.valid" class="alert alert-danger">
+    Question is required
   </div>
-  <div class="panel-body form-group">
-    <form (ngSubmit)="submitForm(question); questionForm.resetForm(); tagSelect.value = ''" #questionForm="ngForm">
-    <label for="text">Question:</label>
-    <input [(ngModel)]="question.text" #text="ngModel" id="text" name="text" class="form-control" required>
-    <div [hidden]="text.valid" class="alert alert-danger">
-      Question is required
-    </div>
 
-    <label for="tags">Tags:</label>
-    <select (change)="appendTag($event.target.value); tagSelect.value=''" #tagSelect id="tags" name="tags" class="form-control" required>
-      <option value='' disabled>Add Tags</option>
-      <option value="General">General</option>
-      <option value="HTML">HTML</option>
-      <option value="CSS">CSS</option>
-      <option value="JavaScript">JavaScript</option>
-      <option value="Ember.js">Ember.js</option>
-      <option value="Angular.js">Angular.js</option>
-      <option value="PHP">PHP</option>
-      <option value="Silex">Silex</option>
-      <option value="Drupal">Drupal</option>
-      <option value="SQL">SQL</option>
-    </select>
-    <div [hidden]="question.tags.length > 0" class="alert alert-danger">
-      Tags are required
-    </div>
-
-    <div *ngIf="question.tags.length > 0">
-      <h4>Tags:</h4>
-      <ul>
-        <li *ngFor="let tag of question.tags" (click)="removeTag(tag)">{{tag}}</li>
-      </ul>
-    </div>
-
-    <label for="answer">Answer:</label>
-    <input [(ngModel)]="question.answer" #answer="ngModel" id="answer" name="answer" class="form-control" required>
-    <div [hidden]="answer.valid" class="alert alert-danger">
-      An answer is required
-    </div>
-
-    <button class="btn btn-success" type="submit" [disabled]="(!questionForm.form.valid || question.tags.length < 1)"><span *ngIf="!questionToEdit">Add Question</span><span *ngIf="questionToEdit">Done Editing</span></button>
-
-    </form>
+  <label for="tags">Tags:</label>
+  <select (change)="appendTag($event.target.value); tagSelect.value=''" #tagSelect id="tags" name="tags" class="form-control" required>
+    <option value='' disabled>Add Tags</option>
+    <option value="General">General</option>
+    <option value="HTML">HTML</option>
+    <option value="CSS">CSS</option>
+    <option value="JavaScript">JavaScript</option>
+    <option value="Ember.js">Ember.js</option>
+    <option value="Angular.js">Angular.js</option>
+    <option value="PHP">PHP</option>
+    <option value="Silex">Silex</option>
+    <option value="Drupal">Drupal</option>
+    <option value="SQL">SQL</option>
+  </select>
+  <div [hidden]="question.tags.length > 0" class="alert alert-danger">
+    Tags are required
   </div>
-</div>
+
+  <div *ngIf="question.tags.length > 0">
+    <h4>Tags:</h4>
+    <ul>
+      <li *ngFor="let tag of question.tags" (click)="removeTag(tag)">{{tag}}</li>
+    </ul>
+  </div>
+
+  <label for="answer">Answer:</label>
+  <input [(ngModel)]="question.answer" #answer="ngModel" id="answer" name="answer" class="form-control" required>
+  <div [hidden]="answer.valid" class="alert alert-danger">
+    An answer is required
+  </div>
+
+  <button class="custom-button" type="submit" [disabled]="(!questionForm.form.valid || question.tags.length < 1)"><span *ngIf="!questionToEdit">Add Question</span><span *ngIf="questionToEdit">Done Editing</span></button>
+
+</form>

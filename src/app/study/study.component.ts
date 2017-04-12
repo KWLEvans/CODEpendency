@@ -60,7 +60,7 @@ export class StudyComponent implements OnInit {
 
   randomQuestion() {
     let randomIndex = Math.floor(this.questions.length * Math.random());
-    if (this.deckQuestions) {
+    if (this.deckQuestions.length > 0) {
       this.selectedQuestion = this.deckQuestions[randomIndex];
     } else {
       this.selectedQuestion = this.questions[randomIndex];

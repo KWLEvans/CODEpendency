@@ -4,7 +4,7 @@
 </div>
 <hr>
 
-<button (click)="randomQuestion()" *ngIf="!selectedQuestion" class="btn btn-success">Start</button>
+<button (click)="randomQuestion()" *ngIf="!selectedQuestion" class="custom-button">Start</button>
 <app-flash-card *ngIf="selectedQuestion" [question]="selectedQuestion" (answeredSender)="answerQuestion($event)"></app-flash-card>
 <div *ngFor="let deck of decks | async | filterByTag:deckIds">
   <div (click)="selectDeck(deck.$key);randomQuestion();" class="panel panel-default">
