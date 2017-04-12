@@ -1,4 +1,9 @@
-<h3>All {{filter}} Questions</h3>
+<div id="study-logo">
+  <img routerLink="study/General" src="./../assets/general.png" alt="general logo" class="icon">
+  <p>All {{filter}} Questions</p>
+</div>
+<hr>
+
 <button (click)="randomQuestion()" *ngIf="!selectedQuestion" class="btn btn-success">Start</button>
 <app-flash-card *ngIf="selectedQuestion" [question]="selectedQuestion" (answeredSender)="answerQuestion($event)"></app-flash-card>
 <div *ngFor="let deck of decks | async | filterByTag:deckIds">

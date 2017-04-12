@@ -1,10 +1,22 @@
-<div class="container">
-  <div [hidden]="flipped" (click)="flipped = true" class="well">
-    <h2>{{question.text}}</h2>
+<div class="flip-container" [ngClass]="{'hover':flippedCard}">
+
+  <div class="flipper">
+
+    <div class="front" (click)="flippedCard=true">
+      <div>
+        <h2>Q</h2>
+        <h2>{{question.text}}</h2>
+      </div>
+    </div>
+    <div class="back">
+      <div>
+        <h2>{{question.answer}}</h2>
+      </div>
+    </div>
   </div>
-  <div [hidden]="!flipped" class="well">
-    <h2>{{question.answer}}</h2>
-    <button class="btn btn-success" (click)="rightAnswer(); flipped = false;">Right</button>
-    <button class="btn btn-danger" (click)="wrongAnswer(); flipped = false;">Wrong</button>
-  </div>
+</div>
+
+<div id="buttons-div">
+  <button class="btn btn-success" (click)="flippedCard=false; rightAnswer();" [disabled]="!flippedCard">Right</button>
+  <button class="btn btn-danger" (click)="flippedCard=false; wrongAnswer();" [disabled]="!flippedCard">Wrong</button>
 </div>
