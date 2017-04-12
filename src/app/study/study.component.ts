@@ -19,6 +19,8 @@ import { FilterByTagPipe } from './../filter-by-tag.pipe';
 })
 export class StudyComponent implements OnInit {
   filter: string;
+  imageLink: string;
+  selectedDeck;
   questions: Question[] = [];
   deckQuestions: Question[] =[];
   selectedQuestion: Question;
@@ -32,6 +34,9 @@ export class StudyComponent implements OnInit {
     this.route.params.forEach(urlParameters => {
       this.filter = urlParameters['filter'];
     });
+
+    this.selectImageLink();
+
     this.questionService.getQuestions().subscribe(questionArray => {
       questionArray.forEach(question => {
         let newQuestion = new Question(question.text, question.deck, question.tags, question.answer, question.authorId);
@@ -48,7 +53,43 @@ export class StudyComponent implements OnInit {
     });
   }
 
+  selectImageLink() {
+    switch(this.filter) {
+      case "General":
+        this.imageLink = "general";
+        break;
+      case "HTML":
+        this.imageLink = "html";
+        break;
+      case "CSS":
+        this.imageLink = "css";
+        break;
+      case "JavaScript":
+        this.imageLink = "js";
+        break;
+      case "Angular.js":
+        this.imageLink = "angular";
+        break;
+      case "Ember.js":
+        this.imageLink = "ember";
+        break;
+      case "PHP":
+        this.imageLink = "php";
+        break;
+      case "Silex":
+        this.imageLink = "silex";
+        break;
+      case "SQL":
+        this.imageLink = "sql";
+        break;
+      case "Drupal":
+        this.imageLink = "drupal";
+        break;
+    }
+  }
+
   selectDeck(deckId: string) {
+    this.selectedDeck = this.deckService.getDeckById(deckId);
     let newQuestions: Question[] = [];
     this.questions.forEach(question => {
       if (question.deck === deckId) {
