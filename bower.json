@@ -6,7 +6,7 @@
     "jennifer beem <thebeemteam.boss>"
   ],
   "license": "MIT",
-  "homepage": "",
+  "homepage": "https://github.com/KWLEvans/CODEpendency",
   "ignore": [
     "**/.*",
     "node_modules",

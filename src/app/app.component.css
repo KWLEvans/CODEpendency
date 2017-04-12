@@ -1,0 +1,43 @@
+#nav {
+  width: 100%;
+}
+
+#login-info {
+  float: right;
+  display: inline-block;
+  color: grey;
+  font-size: 1em;
+}
+
+#log-out {
+  color: #771F1F;
+  cursor: pointer;
+}
+
+
+#nav-links {
+  display: inline-block;
+  font-size: 1em;
+}
+
+#nav-links a {
+  color: grey;
+}
+
+hr {
+  margin-top: 8px;
+  margin-bottom: 50px;
+}
+
+.navbar {
+  background-color: inherit;
+  border: none;
+}
+
+.navbar-header {
+   width: 100%;
+ }
+
+.nav-right {
+  float: right;
+}

@@ -8,7 +8,8 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 export class FlashCardComponent implements OnInit {
   @Input() question;
   @Output() answeredSender = new EventEmitter;
-  flipped: boolean = false;
+
+  flippedCard: boolean = false;
 
   constructor() { }
 
@@ -22,4 +23,5 @@ export class FlashCardComponent implements OnInit {
   wrongAnswer() {
     this.answeredSender.emit(false);
   }
+
 }
