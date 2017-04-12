@@ -14,11 +14,11 @@ export class UserService {
     return this.users;
   }
 
-  getUserByUserName(inputUserName: string) {
+  getUserByUId(inputUId: string) {
     return this.angularFire.database.list('users/', {
       query: {
-        orderByChild: 'userName',
-        equalTo: inputUserName
+        orderByChild: 'uId',
+        equalTo: inputUId
       }
     })
   }
@@ -34,7 +34,7 @@ export class UserService {
   addQuestion(localUser){
     let userToUpdate = this.getUserById(localUser.$key);
       userToUpdate.update({
-        userName: localUser.userName,
+        uId: localUser.uId,
         questionsAnswered: localUser.questionsAnswered,
       });
     }

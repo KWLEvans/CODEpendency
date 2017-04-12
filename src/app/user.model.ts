@@ -1,3 +1,3 @@
 export class User {
-  constructor(public userName: string, public questionsAnswered) {}
+  constructor(public uId: string, public questionsAnswered) {}
 }

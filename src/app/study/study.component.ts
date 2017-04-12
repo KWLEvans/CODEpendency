@@ -55,17 +55,17 @@ export class StudyComponent implements OnInit {
         }
       });
     });
-    if(this.user_displayName){
-      this.userService.getUserByUserName(this.user_displayName).subscribe(returnedUser => {
+    if(this.authService.currentUserId){
+      this.userService.getUserByUId(this.authService.currentUserId).subscribe(returnedUser => {
         this.currentUser = returnedUser[0];
         if(this.currentUser){
           console.log(this.currentUser);
         } else {
           let emptyArray = [["vacant question", 0]];
-          let newUser = new User(this.user_displayName, emptyArray);
+          let newUser = new User(this.authService.currentUserId, emptyArray);
           console.log("new user" + newUser);
           this.userService.saveUser(newUser);
-          this.userService.getUserByUserName(this.user_displayName).subscribe(returnedUser =>{
+          this.userService.getUserByUId(this.authService.currentUserId).subscribe(returnedUser =>{
             this.currentUser = returnedUser;
             console.log(this.currentUser);
           });
@@ -81,19 +81,21 @@ export class StudyComponent implements OnInit {
     let questionChosen = false;
     let questionFound = false;
     console.log(possibleQuestion.text);
-    for(let i = 0; i < userQuestions.length; i++){
-      if (possibleQuestion.text === userQuestions[i][0]){
-        console.log("question previously asked");
-        questionFound = true;
-        let chooseQuestion = userQuestions[i][1];
-        let randomizer = Math.floor(4 * Math.random());
-        console.log("Chosen Question Weight:" + chooseQuestion);
-        console.log("Randomizer Weight:" + randomizer);
-        if(randomizer <= chooseQuestion){
-          console.log("question chosen");
-          questionChosen = true;
-        } else {
-          console.log("question not chosen");
+    if(userQuestions){
+      for(let i = 0; i < userQuestions.length; i++){
+        if (possibleQuestion.text === userQuestions[i][0]){
+          console.log("question previously asked");
+          questionFound = true;
+          let chooseQuestion = userQuestions[i][1];
+          let randomizer = Math.floor(4 * Math.random());
+          console.log("Chosen Question Weight:" + chooseQuestion);
+          console.log("Randomizer Weight:" + randomizer);
+          if(randomizer <= chooseQuestion){
+            console.log("question chosen");
+            questionChosen = true;
+          } else {
+            console.log("question not chosen");
+          }
         }
       }
     }
@@ -140,9 +142,12 @@ export class StudyComponent implements OnInit {
     }
     if(questionFound === false){
       console.log("Question not previously answered.");
-      this.currentUser.questionsAnswered.push([this.selectedQuestion.text, weight]);
+      if(this.currentUser){
+        console.log(this.currentUser);
+        this.currentUser.questionsAnswered.push([this.selectedQuestion.text, weight]);
+        this.userService.addQuestion(this.currentUser);
+      }
     };
-    this.userService.addQuestion(this.currentUser);
   }
 
 }
