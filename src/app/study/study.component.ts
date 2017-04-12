@@ -12,12 +12,13 @@ import { AuthService } from './../providers/auth.service';
 import { UserService } from './../user.service';
 import { AngularFire, FirebaseListObservable } from 'angularfire2';
 import { FilterByTagPipe } from './../filter-by-tag.pipe';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-study',
   templateUrl: './study.component.html',
   styleUrls: ['./study.component.css'],
-  providers: [ QuestionService, AuthService, DeckService UserService ]
+  providers: [ QuestionService, AuthService, DeckService, UserService ]
 
 })
 export class StudyComponent implements OnInit {
@@ -31,7 +32,7 @@ export class StudyComponent implements OnInit {
   deckIds: string[] = [];
   decks;
 
-  constructor(private route: ActivatedRoute, private location: Location, private questionService: QuestionService, private authService: AuthService, private userService: UserService, private deckService: DeckService) {
+  constructor(private route: ActivatedRoute, private location: Location, private questionService: QuestionService, private authService: AuthService, private userService: UserService, private deckService: DeckService, private router: Router) {
     this.authService.af.auth.subscribe(
       (auth) => {
         if (auth == null) {
@@ -98,43 +99,57 @@ export class StudyComponent implements OnInit {
   }
 
   randomQuestion() {
-    let randomIndex = Math.floor(this.questions.length * Math.random());
-    if (this.deckQuestions)
+    let possibleQuestion;
+    let randomIndex
+    console.log(this.questions);
+    if (this.deckQuestions.length > 0)
     {
-      let possibleQuestion = this.deckQuestions[randomIndex];
+      console.log('hi i am a deck');
+      console.log(this.deckQuestions);
+      randomIndex = Math.floor(this.deckQuestions.length * Math.random());
+      possibleQuestion = this.deckQuestions[randomIndex];
     } else {
-      let possibleQuestion = this.questions[randomIndex];
+      console.log('hi i am not a deck');
+      randomIndex = Math.floor(this.questions.length * Math.random());
+      console.log(randomIndex);
+      possibleQuestion = this.questions[randomIndex];
+      console.log(possibleQuestion);
     }
     let userQuestions = this.currentUser.questionsAnswered;
     let questionChosen = false;
     let questionFound = false;
-    console.log(possibleQuestion.text);
-    if(userQuestions){
-      for(let i = 0; i < userQuestions.length; i++){
-        if (possibleQuestion.text === userQuestions[i][0]){
-          console.log("question previously asked");
-          questionFound = true;
-          let chooseQuestion = userQuestions[i][1];
-          let randomizer = Math.floor(4 * Math.random());
-          console.log("Chosen Question Weight:" + chooseQuestion);
-          console.log("Randomizer Weight:" + randomizer);
-          if(randomizer <= chooseQuestion){
-            console.log("question chosen");
-            questionChosen = true;
-          } else {
-            console.log("question not chosen");
+    console.log(possibleQuestion);
+    if(possibleQuestion){
+      if(userQuestions){
+        for(let i = 0; i < userQuestions.length; i++){
+          if (possibleQuestion.text === userQuestions[i][0]){
+            console.log("question previously asked");
+            questionFound = true;
+            let chooseQuestion = userQuestions[i][1];
+            let randomizer = Math.floor(4 * Math.random());
+            console.log("Chosen Question Weight:" + chooseQuestion);
+            console.log("Randomizer Weight:" + randomizer);
+            if(randomizer <= chooseQuestion){
+              console.log("question chosen");
+              questionChosen = true;
+            } else {
+              console.log("question not chosen");
+            }
           }
         }
       }
-    }
-    if(questionChosen === true) {
-      this.selectedQuestion = possibleQuestion;
-    } else if(questionFound === false) {
-      console.log("user has not previously answered this q");
-      this.selectedQuestion = possibleQuestion;
-    } else {
-      console.log("re-randomizing question");
-      this.randomQuestion();
+      if(questionChosen === true) {
+        this.selectedQuestion = possibleQuestion;
+      } else if(questionFound === false) {
+        console.log("user has not previously answered this q");
+        this.selectedQuestion = possibleQuestion;
+      } else {
+        console.log("re-randomizing question");
+        this.randomQuestion();
+      }
+      } else {
+      alert("No questions available!");
+      this.router.navigate(['']);
     }
   }
 
