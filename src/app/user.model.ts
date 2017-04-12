@@ -1,4 +1,3 @@
 export class User {
-  questionsAnswered: string[];
-  constructor(public userID: string) {}
+  constructor(public userName: string, public questionsAnswered) {}
 }

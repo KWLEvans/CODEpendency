@@ -8,6 +8,7 @@ import { FlashCardComponent } from './../flash-card/flash-card.component';
 import { TagPipe } from './../tag.pipe';
 import { AuthService } from './../providers/auth.service';
 import { UserService } from './../user.service';
+import { AngularFire, FirebaseListObservable } from 'angularfire2';
 
 @Component({
   selector: 'app-study',
@@ -21,6 +22,7 @@ export class StudyComponent implements OnInit {
   selectedQuestion: Question;
   user_displayName;
   isLoggedIn;
+  currentUser;
 
   constructor(private route: ActivatedRoute, private location: Location, private questionService: QuestionService, private authService: AuthService, private userService: UserService) {
     this.authService.af.auth.subscribe(
@@ -53,29 +55,94 @@ export class StudyComponent implements OnInit {
         }
       });
     });
+    if(this.user_displayName){
+      this.userService.getUserByUserName(this.user_displayName).subscribe(returnedUser => {
+        this.currentUser = returnedUser[0];
+        if(this.currentUser){
+          console.log(this.currentUser);
+        } else {
+          let emptyArray = [["vacant question", 0]];
+          let newUser = new User(this.user_displayName, emptyArray);
+          console.log("new user" + newUser);
+          this.userService.saveUser(newUser);
+          this.userService.getUserByUserName(this.user_displayName).subscribe(returnedUser =>{
+            this.currentUser = returnedUser;
+            console.log(this.currentUser);
+          });
+        };
+      });
+    }
   }
 
   randomQuestion() {
     let randomIndex = Math.floor(this.questions.length * Math.random());
-    this.selectedQuestion = this.questions[randomIndex];
+    let possibleQuestion = this.questions[randomIndex];
+    let userQuestions = this.currentUser.questionsAnswered;
+    let questionChosen = false;
+    let questionFound = false;
+    console.log(possibleQuestion.text);
+    for(let i = 0; i < userQuestions.length; i++){
+      if (possibleQuestion.text === userQuestions[i][0]){
+        console.log("question previously asked");
+        questionFound = true;
+        let chooseQuestion = userQuestions[i][1];
+        let randomizer = Math.floor(4 * Math.random());
+        console.log("Chosen Question Weight:" + chooseQuestion);
+        console.log("Randomizer Weight:" + randomizer);
+        if(randomizer <= chooseQuestion){
+          console.log("question chosen");
+          questionChosen = true;
+        } else {
+          console.log("question not chosen");
+        }
+      }
+    }
+    if(questionChosen === true) {
+      this.selectedQuestion = possibleQuestion;
+    } else if(questionFound === false) {
+      console.log("user has not previously answered this q");
+      this.selectedQuestion = possibleQuestion;
+    } else {
+      console.log("re-randomizing question");
+      this.randomQuestion();
+    }
   }
 
   answerQuestion(value: boolean) {
-    if(this.user_displayName){
-      let currentUser = this.userService.getUserById(user_displayName);
-      console.log(currentUser);
-      if(currentUser){
-        this.userService.addQuestion(currentUser, selectedQuestion, value);
-      } else {
-        let newUser = new User(this.user_displayName);
-        this.userService.saveUser(newUser);
-        this.userService.addQuestion(currentUser, selectedQuestion, value);
-      }
-    }
-
+    this.addQuestionToUser(value);
     // This is where weighting and sorting answers can happen in the future
     console.log(value);
     this.randomQuestion();
+  }
+
+  getUser(){
+  }
+
+  addQuestionToUser(responseValue)
+  {
+    let userQuestions = this.currentUser.questionsAnswered;
+    let questionFound = false;
+    let weight = 2;
+    if(userQuestions){
+      console.log(this.selectedQuestion.text);
+      for(let i = 0; i < userQuestions.length; i++){
+        if(userQuestions[i][0] === this.selectedQuestion.text){
+          console.log("previously answered question found at" + i);
+          if(responseValue === false && userQuestions[i][1] > 5){
+            userQuestions[i][1]++;
+            questionFound = true;
+          } else if (responseValue === true && userQuestions[i][1] > 0) {
+            userQuestions[i][1]--;
+            questionFound = true;
+          }
+        }
+      };
+    }
+    if(questionFound === false){
+      console.log("Question not previously answered.");
+      this.currentUser.questionsAnswered.push([this.selectedQuestion.text, weight]);
+    };
+    this.userService.addQuestion(this.currentUser);
   }
 
 }

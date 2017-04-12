@@ -4,48 +4,38 @@ import { User } from './user.model';
 
 @Injectable()
 export class UserService {
-  allUsers: FirebaseListObservable<any[]>;
+  users: FirebaseListObservable<any[]>;
 
   constructor(private angularFire: AngularFire) {
-    this.allUsers = this.angularFire.database.list('users');
+    this.users = this.angularFire.database.list('users');
   }
 
   getUsers() {
-    return this.allUsers;
+    return this.users;
   }
 
-  getUserById(userID: string) {
-    return this.angularFire.database.object('users/' + userID);
+  getUserByUserName(inputUserName: string) {
+    return this.angularFire.database.list('users/', {
+      query: {
+        orderByChild: 'userName',
+        equalTo: inputUserName
+      }
+    })
   }
 
-  addQuestion(currentUser, questionId, responseValue){
-    let userToUpdate = this.getUserById(currentUser.$key);
-    let userQuestions = userToUpdate.questionsAnswered;
-    let questionFound = false;
-    let weight = 1;
-    if(userQuestions){
-      for(let i = 0; i < userQuestions.length; i++){
-        if(userQuestions[i][0] === questionId){
-          if(responseValue === false){
-            userQuestions[i][1]++;
-            questionFound = true;
-          } else if (responseValue === true && userQuestions[i].[1] > 0) {
-            userQuestions[i][1]--;
-            questionFound = true;
-          }
-        }
-      };
-    }
-    if(questionFound === false){
-      if(responseValue === false){
-        weight++;
-      };
-      userToUpdate.userQuestions.push([questionId, weight]);
-    };
-    userToUpdate.update({userQuestions: userToUpdate.userQuestions})
+  getUserById(inputId: string){
+    return this.angularFire.database.object('users/'+inputId);
   }
 
   saveUser(userToSave: User){
-    this.allUsers.push(userToSave);
+    this.users.push(userToSave);
   }
+
+  addQuestion(localUser){
+    let userToUpdate = this.getUserById(localUser.$key);
+      userToUpdate.update({
+        userName: localUser.userName,
+        questionsAnswered: localUser.questionsAnswered,
+      });
+    }
 }
