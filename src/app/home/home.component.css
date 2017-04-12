@@ -2,6 +2,23 @@ body {
   background-color: #011E26;
 }
 
+#header {
+  font-family: Helvetica, sans-serif;
+  color: white;
+  height: 120%;
+  width: 100%;
+}
+
+#header h3 {
+  margin-top: 0px;
+  margin-bottom: 40px;
+}
+
+#logo {
+  height: 250px;
+  width: auto;
+}
+
 .row-centered {
   text-align: center;
 }
@@ -12,11 +29,6 @@ body {
   text-align: left;
   margin-right: -4px;
   text-align: center;
-}
-
-hr {
-  /*border-color: grey;*/
-  margin-top: 30px;
 }
 
 #middle-row {

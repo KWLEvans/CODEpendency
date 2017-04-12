@@ -15,6 +15,11 @@
 	height: 400px;
 }
 
+.front {
+	border: 3px solid #d64949;
+	border-radius: 3px;
+}
+
 /* flip speed goes here */
 .flipper {
 	transition: 0.6s;

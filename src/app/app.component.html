@@ -1,20 +1,3 @@
-<!-- <nav class="navbar navbar-default navbar-fixed-top">
-  <div class="navbar-header" *ngIf="isLoggedIn">
-    <h1>CODEpendent</h1>
-    <ul class="nav navbar-nav">
-      <li><a routerLink="">Home</a></li>
-      <li><a routerLink="new-deck">New Deck</a></li>
-    </ul>
-    <p class="navbar-text navbar-right">Logged In: {{user_displayName}} ({{user_email}})<p>
-      <p><button class="btn btn-default" (click)="logout()">Logout</button></p>
-    </div>
-    <div *ngIf="!isLoggedIn">
-      <p class="navbar-text navbar-right">Logged Out</p>
-    </div>
-</nav>
-<hr> -->
-
-
 <div class="container">
 
 
@@ -33,38 +16,5 @@
     </div>
   </nav>
 
-  <!-- <div id="nav-top">
-    <div id="nav-links">
-      <a routerLink="">Home</a>
-      <span>|</span>
-      <a routerLink="new-deck">New Deck </a>
-    </div>
-    <div id="login-info">
-      <span><u>{{user_displayName}}</u></span>
-      <span>|</span>
-      <span (click)="logout()" id="log-out">Log out</span>
-    </div>
-  </div> -->
-
-  <div align="center" id="header">
-    <img src="./../assets/codependency_white.svg" alt="app logo" id="logo">
-    <h3>We <em>need</em> you to study with us.</h3>
-  </div>
-
-  <!-- <div id="nav">
-    <div id="nav-links">
-      <a routerLink="">Home</a>
-      <span>|</span>
-      <a routerLink="new-deck">New Deck </a>
-    </div>
-    <div id="login-info">
-      <span><u>{{user_displayName}}</u></span>
-      <span>|</span>
-      <span (click)="logout()" id="log-out">Log out</span>
-    </div>
-  </div> -->
-
-
-  <hr>
 <router-outlet></router-outlet>
 </div>
