@@ -18,19 +18,44 @@ import { QuestionService } from './../question.service';
 })
 export class YourDecksComponent implements OnInit {
 
-  constructor(private deckService: DeckService, private authService: AuthService,  private router: Router, private questionService: QuestionService) { }
-
-  loggedInUser: string;
-  decks;
+  user_displayName;
+  isLoggedIn;
+  currentUser;
   userDecks: Deck [] = [];
+  displayDecks: Deck [] = [];
+
+  constructor(private deckService: DeckService, private authService: AuthService,  private router: Router, private questionService: QuestionService) {
+    this.authService.af.auth.subscribe(
+      (auth) => {
+        if (auth == null) {
+          this.isLoggedIn = false;
+          this.user_displayName = '';
+          this.authService.currentUserName = null;
+          this.authService.currentUserId = null;
+        } else {
+          this.isLoggedIn = true;
+          this.user_displayName = auth.google.displayName;
+          this.authService.currentUserName = auth.google.displayName;
+          this.authService.currentUserId = auth.uid;
+        }
+      }
+    );
+  }
+
 
   ngOnInit() {
-    this.deckService.getDecks().subscribe(deckArray => {
+    this.deckService.getDecks().subscribe( deckArray => {
       deckArray.forEach(deck => {
-        let currentDeck = new Deck(deck.name, deck.author);
-        this.userDecks.push(currentDeck);
+        let currentDeck = new Deck(deck.name, deck.author)
+          this.userDecks.push(currentDeck);
       });
     });
+    this.userDecks.forEach(deck => {
+        if(deck.author == this.user_displayName){
+          this.displayDecks.push(deck);
+        }
+    });
+    console.log(this.userDecks)
   }
 
 
