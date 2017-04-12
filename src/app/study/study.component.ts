@@ -3,28 +3,35 @@ import { ActivatedRoute, Params } from '@angular/router';
 import { Location } from '@angular/common';
 import { User } from './../user.model';
 import { Question } from './../question.model';
+import { Deck } from './../deck.model';
 import { QuestionService } from './../question.service';
+import { DeckService } from './../deck.service';
 import { FlashCardComponent } from './../flash-card/flash-card.component';
 import { TagPipe } from './../tag.pipe';
 import { AuthService } from './../providers/auth.service';
 import { UserService } from './../user.service';
 import { AngularFire, FirebaseListObservable } from 'angularfire2';
+import { FilterByTagPipe } from './../filter-by-tag.pipe';
 
 @Component({
   selector: 'app-study',
   templateUrl: './study.component.html',
   styleUrls: ['./study.component.css'],
-  providers: [ QuestionService, AuthService, UserService ]
+  providers: [ QuestionService, AuthService, DeckService UserService ]
+
 })
 export class StudyComponent implements OnInit {
   filter: string;
   questions: Question[] = [];
+  deckQuestions: Question[] =[];
   selectedQuestion: Question;
   user_displayName;
   isLoggedIn;
   currentUser;
+  deckIds: string[] = [];
+  decks;
 
-  constructor(private route: ActivatedRoute, private location: Location, private questionService: QuestionService, private authService: AuthService, private userService: UserService) {
+  constructor(private route: ActivatedRoute, private location: Location, private questionService: QuestionService, private authService: AuthService, private userService: UserService, private deckService: DeckService) {
     this.authService.af.auth.subscribe(
       (auth) => {
         if (auth == null) {
@@ -43,9 +50,9 @@ export class StudyComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.decks = this.deckService.getDecks();
     this.route.params.forEach(urlParameters => {
       this.filter = urlParameters['filter'];
-      console.log(typeof this.filter);
     });
     this.questionService.getQuestions().subscribe(questionArray => {
       questionArray.forEach(question => {
@@ -72,11 +79,32 @@ export class StudyComponent implements OnInit {
         };
       });
     }
+
+    this.questions.forEach(question => {
+      if (!this.deckIds.includes(question.deck)) {
+        this.deckIds.push(question.deck);
+      }
+    });
+  }
+
+  selectDeck(deckId: string) {
+    let newQuestions: Question[] = [];
+    this.questions.forEach(question => {
+      if (question.deck === deckId) {
+        newQuestions.push(question);
+      }
+    });
+    this.deckQuestions = newQuestions;
   }
 
   randomQuestion() {
     let randomIndex = Math.floor(this.questions.length * Math.random());
-    let possibleQuestion = this.questions[randomIndex];
+    if (this.deckQuestions)
+    {
+      let possibleQuestion = this.deckQuestions[randomIndex];
+    } else {
+      let possibleQuestion = this.questions[randomIndex];
+    }
     let userQuestions = this.currentUser.questionsAnswered;
     let questionChosen = false;
     let questionFound = false;
