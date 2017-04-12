@@ -23,14 +23,18 @@
   float: right;
   display: inline-block;
   color: grey;
+  /*font-family: 'Montserrat', sans-serif;*/
+  font-size: 1em;
 }
 
 #log-out {
-  color: #d64949;
+  color: #771F1F;
 }
 
 #nav-links {
   display: inline-block;
+  /*font-family: 'Montserrat', sans-serif;*/
+  font-size: 1em;
 }
 
 #nav-links a {
@@ -40,3 +44,7 @@
 hr {
   margin-top: 8px;
 }
+
+/*h3 em {
+  color: #FF9900;
+}*/
