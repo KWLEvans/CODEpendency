@@ -29,7 +29,12 @@
 
 #log-out {
   color: #771F1F;
+  cursor: pointer;
 }
+
+/*#log-out:hover {
+  text-decoration: underline;
+}*/
 
 #nav-links {
   display: inline-block;
@@ -45,6 +50,16 @@ hr {
   margin-top: 8px;
 }
 
-/*h3 em {
-  color: #FF9900;
-}*/
+.navbar {
+  background-color: inherit;
+  border: none;
+}
+
+
+.navbar-header {
+   width: 100%;
+ }
+
+.nav-right {
+  float: right;
+}

@@ -16,12 +16,24 @@
 
 
 <div class="container">
-  <div align="center" id="header">
-    <img src="./../assets/codependency_white.svg" alt="app logo" id="logo">
-    <h3>We <em>need</em> you to study with us.</h3>
-  </div>
 
-  <div id="nav">
+
+  <nav class="navbar navbar-default">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <a class="navbar-brand" routerLink="">Home</a>
+        <span class="navbar-brand">|</span>
+        <a class="navbar-brand" routerLink="new-deck">New Deck</a>
+        <div class="nav-right">
+          <span class="navbar-brand">{{user_displayName}}</span>
+          <a class="navbar-brand">|</a>
+          <a class="navbar-brand" (click)="logout()" id="log-out">Log out</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- <div id="nav-top">
     <div id="nav-links">
       <a routerLink="">Home</a>
       <span>|</span>
@@ -32,7 +44,25 @@
       <span>|</span>
       <span (click)="logout()" id="log-out">Log out</span>
     </div>
+  </div> -->
+
+  <div align="center" id="header">
+    <img src="./../assets/codependency_white.svg" alt="app logo" id="logo">
+    <h3>We <em>need</em> you to study with us.</h3>
   </div>
+
+  <!-- <div id="nav">
+    <div id="nav-links">
+      <a routerLink="">Home</a>
+      <span>|</span>
+      <a routerLink="new-deck">New Deck </a>
+    </div>
+    <div id="login-info">
+      <span><u>{{user_displayName}}</u></span>
+      <span>|</span>
+      <span (click)="logout()" id="log-out">Log out</span>
+    </div>
+  </div> -->
 
 
   <hr>
