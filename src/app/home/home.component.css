@@ -2,12 +2,6 @@ body {
   background-color: #011E26;
 }
 
-#header {
-  margin-top: 50px;
-  font-family: Helvetica, sans-serif;
-  color: white;
-}
-
 .row-centered {
   text-align: center;
 }
@@ -37,29 +31,12 @@ hr {
   margin-bottom: 50px;
 }
 
-
 .icon {
   height: 70%;
   width: 70%;
   border-radius: 50%;
   border: 2px solid white;
   background-color: white;
-  /*box-shadow: 5px 5px 5px #888888;*/
-}
-
-#header {
-  height: 120%;
-  width: 100%;
-}
-
-/*.icon-div {
-  background-color: white;
-  border-radius: 5px;
-}*/
-
-.logo {
-  height: 250px;
-  width: auto;
 }
 
 #drupal {

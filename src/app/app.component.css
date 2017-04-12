@@ -1,0 +1,42 @@
+#header {
+  font-family: Helvetica, sans-serif;
+  color: white;
+  height: 120%;
+  width: 100%;
+}
+
+#header h3 {
+  margin-top: 0px;
+  margin-bottom: 40px;
+}
+
+#logo {
+  height: 250px;
+  width: auto;
+}
+
+#nav {
+  width: 100%;
+}
+
+#login-info {
+  float: right;
+  display: inline-block;
+  color: grey;
+}
+
+#log-out {
+  color: #d64949;
+}
+
+#nav-links {
+  display: inline-block;
+}
+
+#nav-links a {
+  color: grey;
+}
+
+hr {
+  margin-top: 8px;
+}

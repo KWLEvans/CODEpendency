@@ -1,22 +1,18 @@
-/*.well {
-  text-align: center;
-  width: 400px;
-  height: 300px;
-  padding-top: 110px;
-}*/
 
 /* entire container, keeps perspective */
 .flip-container {
 	perspective: 1000px;
+	margin: auto;
 }
 	/* flip the pane when hovered */
-	.flip-container:focus .flipper, .flip-container.hover .flipper {
-		transform: rotateY(180deg);
-	}
+.flip-container.hover .flipper {
+	transform: rotateY(180deg);
+	transform-origin: center center;
+}
 
 .flip-container, .front, .back {
-	width: 320px;
-	height: 480px;
+	width: 520px;
+	height: 400px;
 }
 
 /* flip speed goes here */
@@ -34,6 +30,11 @@
 	position: absolute;
 	top: 0;
 	left: 0;
+	background-color: white;
+	display: flex;
+	align-items: center;
+	text-align: center;
+	border-radius: 3px;
 }
 
 /* front pane, placed above back */
@@ -46,4 +47,20 @@
 /* back, initially hidden pane */
 .back {
 	transform: rotateY(180deg);
+}
+
+.front div, .back div {
+	width: 100%;
+}
+
+h2 {
+	color: black;
+	width: 100%;
+	font-size: 1.4em;
+	display: block;
+}
+
+#buttons-div {
+	margin-top: 30px;
+	text-align: center;
 }
