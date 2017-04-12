@@ -18,6 +18,7 @@ import { FlashCardComponent } from './flash-card/flash-card.component';
 import { StudyComponent } from './study/study.component';
 import { TagPipe } from './tag.pipe';
 import { LoginPageComponent } from './login-page/login-page.component';
+import { FilterByTagPipe } from './filter-by-tag.pipe';
 
 export const firebaseConfig = {
   apiKey: masterFirebaseConfig.apiKey,
@@ -38,7 +39,8 @@ export const firebaseConfig = {
     FlashCardComponent,
     StudyComponent,
     TagPipe,
-    LoginPageComponent
+    LoginPageComponent,
+    FilterByTagPipe
   ],
   imports: [
     BrowserModule,
