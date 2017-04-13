@@ -3,12 +3,13 @@
   <div class="flipper">
 
     <div class="front" (click)="flippedCard=true">
+      <h1 class="bad-font">Q:</h1>
       <div>
-        <h2>Q</h2>
         <h2>{{question.text}}</h2>
       </div>
     </div>
     <div class="back">
+      <h1 class="bad-font">A:</h1>
       <div>
         <h2>{{question.answer}}</h2>
       </div>
@@ -17,6 +18,6 @@
 </div>
 
 <div id="buttons-div">
-  <button class="custom-button" (click)="flippedCard=false; rightAnswer();" [disabled]="!flippedCard">Right</button>
-  <button class="custom-button" (click)="flippedCard=false; wrongAnswer();" [disabled]="!flippedCard">Wrong</button>
+  <button class="custom-button btn-no" (click)="flippedCard=false; rightAnswer();" [disabled]="!flippedCard">Right</button>
+  <button class="custom-button btn-yes" (click)="flippedCard=false; wrongAnswer();" [disabled]="!flippedCard">Wrong</button>
 </div>

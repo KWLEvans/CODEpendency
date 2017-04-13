@@ -1,6 +1,6 @@
 <div id="key-logo">
-  <img src="./../assets/key.png" alt="key logo" class="icon">
-  <p>Manage {{(deck | async)?.name}}</p>
+  <img src="./../assets/user-decks.png" alt="logo" class="icon">
+  <p id="header-text">Manage {{(deck | async)?.name}}</p>
 </div>
 <button (click)="deleteDeck = true" class="custom-button">Delete Deck</button>
 <div class="alert alert-danger" [hidden]="!deleteDeck">
@@ -10,8 +10,12 @@
 </div>
 <hr>
 
-<app-question-form [deckId]="(deck | async)?.$key"></app-question-form>
-<div *ngIf="questions">
+<app-question-form *ngIf="!questionToEdit" [deckId]="(deck | async)?.$key"></app-question-form>
+
+<app-question-form *ngIf="questionToEdit" [questionToEdit]="questionToEdit"></app-question-form>
+
+<div *ngIf="questions" id="questions">
   <h3>Questions:</h3>
-  <app-question-tile *ngFor="let question of questions | async | deckId:deckId" [question]="question"></app-question-tile>
+  <hr>
+  <app-question-tile *ngFor="let question of questions | async | deckId:deckId" [question]="question" (editSender)="editQuestion($event)"></app-question-tile>
 </div>

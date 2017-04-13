@@ -1,5 +1,7 @@
-<h3><span *ngIf="!questionToEdit">Add a Question</span><span *ngIf="questionToEdit">Edit Question</span></h3>
+
+<div class="question-form">
 <form (ngSubmit)="submitForm(question); questionForm.resetForm(); tagSelect.value = ''" #questionForm="ngForm">
+  <h3><span *ngIf="!questionToEdit">Add a Question</span><span *ngIf="questionToEdit">Edit Question</span></h3>
   <label for="text">Question:</label>
   <input [(ngModel)]="question.text" #text="ngModel" id="text" name="text" class="form-control" required>
   <div [hidden]="text.valid" class="alert alert-danger">
@@ -40,3 +42,4 @@
   <button class="custom-button" type="submit" [disabled]="(!questionForm.form.valid || question.tags.length < 1)"><span *ngIf="!questionToEdit">Add Question</span><span *ngIf="questionToEdit">Done Editing</span></button>
 
 </form>
+</div>

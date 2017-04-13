@@ -1,0 +1,35 @@
+h1 {
+  color: white;
+  text-align: center;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.login {
+  height: 75%;
+  width: 75%;
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  border: 9px double grey;
+  margin: auto;
+  vertical-align: middle;
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+.circuit {
+  background-image: url("./../circuit.png");
+  height: 600px;
+  width: 600px;
+  border-radius: 50%;
+  border: 3px solid grey;
+  margin: auto;
+  margin-top: 200px;
+}
+
+button {
+  background-color: rgba(0, 0, 0, 0.5);
+}

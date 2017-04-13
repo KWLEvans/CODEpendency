@@ -1,18 +1,20 @@
 import { Component, OnInit } from '@angular/core';
+import { AngularFire, FirebaseListObservable } from 'angularfire2';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Location } from '@angular/common';
+import { Router } from '@angular/router';
+
 import { User } from './../user.model';
+import { UserService } from './../user.service';
+import { AuthService } from './../providers/auth.service';
 import { Question } from './../question.model';
-import { Deck } from './../deck.model';
 import { QuestionService } from './../question.service';
+import { Deck } from './../deck.model';
 import { DeckService } from './../deck.service';
 import { FlashCardComponent } from './../flash-card/flash-card.component';
+import { DeckTileComponent } from './../deck-tile/deck-tile.component';
 import { TagPipe } from './../tag.pipe';
-import { AuthService } from './../providers/auth.service';
-import { UserService } from './../user.service';
-import { AngularFire, FirebaseListObservable } from 'angularfire2';
 import { FilterByTagPipe } from './../filter-by-tag.pipe';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-study',
@@ -33,6 +35,7 @@ export class StudyComponent implements OnInit {
   currentUser;
   deckIds: string[] = [];
   decks;
+  showDecks: boolean = false;
 
   constructor(private route: ActivatedRoute, private location: Location, private questionService: QuestionService, private authService: AuthService, private userService: UserService, private deckService: DeckService, private router: Router) {
     this.authService.af.auth.subscribe(

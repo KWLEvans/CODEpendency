@@ -3,10 +3,22 @@ form {
   margin-left: 25%;
   margin-right: 25%;
   color: white;
+  background: rgba(60, 60, 60, 0.5);
+  border: 4px double grey;
+  padding: 20px;
+  border-radius: 5px;
+}
+
+form h3 {
+  text-align: center;
 }
 
 h3  {
   color: white;
   font-family: 'Montserrat', sans-serif;
   font-size: 1.5em;
+}
+
+.question-form {
+
 }

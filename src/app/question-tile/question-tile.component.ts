@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 import { QuestionFormComponent } from './../question-form/question-form.component';
 import { QuestionService } from './../question.service';
@@ -11,12 +11,17 @@ import { QuestionService } from './../question.service';
 })
 export class QuestionTileComponent implements OnInit {
   @Input() question;
+  @Output() editSender = new EventEmitter();
   editMode: boolean = false;
   deleteQuestion: boolean = false;
 
   constructor(private questionService: QuestionService) { }
 
   ngOnInit() {
+  }
+
+  editQuestion(questionId: string) {
+    this.editSender.emit(questionId);
   }
 
   startDeletingQuestion(question) {

@@ -14,6 +14,7 @@ export class FlashCardComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    this.flippedCard = false;
   }
 
   rightAnswer() {

@@ -1,12 +1,12 @@
-<div class="well">
+<div class="question-tile panel panel-default col centered col-sm-3">
   <h4><strong>Q: </strong>{{question.text}}</h4>
   <h4><strong>A: </strong>{{question.answer}}</h4>
-  <button (click)="editMode = true" class="custom-button">Edit Question</button>
-  <button (click)="deleteQuestion = true" class="custom-button">Delete Question</button>
-  <div class="alert alert-danger" [hidden]="!deleteQuestion">
-    <h3>Are you sure you want to delete this question?</h3>
-    <button (click)="startDeletingQuestion(question)" class="custom-button">Yes</button>
-    <button (click)="deleteQuestion = false" class="custom-button">No</button>
+  <button (click)="editQuestion(question.$key)" class="custom-button">Edit</button>
+  <button (click)="deleteQuestion = true" class="custom-button">Delete</button>
+  <div class="delete-question" [hidden]="!deleteQuestion">
+    <hr>
+    <h5>Are you sure you want to delete this question?</h5>
+    <button (click)="startDeletingQuestion(question)" class="custom-button btn-yes">Yes</button>
+    <button (click)="deleteQuestion = false" class="custom-button btn-no">No</button>
   </div>
 </div>
-<app-question-form *ngIf="editMode" [questionToEdit]="question"></app-question-form>
