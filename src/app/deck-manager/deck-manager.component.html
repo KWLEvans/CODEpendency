@@ -1,4 +1,8 @@
-<h2>Manage {{(deck | async)?.name}}</h2>
+<div id="key-logo">
+  <img src="./../assets/key.png" alt="key logo" class="icon">
+  <p>Manage {{(deck | async)?.name}}</p>
+</div>
+<hr>
 
 <app-question-form [deckId]="(deck | async)?.$key"></app-question-form>
 <div *ngIf="questions">
