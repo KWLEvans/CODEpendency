@@ -75,7 +75,4 @@ Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app w
   * **bower**: bower js is used for managing front end components like html, css, js etc.
 
 ## CODEpendency Team:
-  * Keith Evans
-  * Jennifer Beem
-  * Charles Peden
-  * Sean Peterson
+  [Keith Evans](https://github.com/KWLEvans), [Jennifer Beem](https://github.com/jeemb), [Charles Peden](https://github.com/ccbpeden), [Sean Peterson](https://github.com/Sean-Peterson)
