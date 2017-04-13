@@ -11,7 +11,11 @@
 
 <app-flash-card *ngIf="selectedQuestion" [question]="selectedQuestion" (answeredSender)="answerQuestion($event)"></app-flash-card>
 
-<h5>Other decks in {{filter}}: </h5>
-<hr id="more-decks-hr">
-<app-deck-tile *ngFor="let deck of decks | async | filterByTag:deckIds" [deck]="deck" (deckSelector)="selectDeck($event);randomQuestion();">
-</app-deck-tile>
+<button *ngIf="!showDecks" (click)="showDecks = true">Show</button>
+<button *ngIf="showDecks" (click)="showDecks = false">Hide</button>
+<div *ngIf="showDecks">
+  <h5>Other decks in {{filter}}: </h5>
+  <hr id="more-decks-hr">
+  <app-deck-tile *ngFor="let deck of decks | async | filterByTag:deckIds" [deck]="deck" (deckSelector)="selectDeck($event);randomQuestion();">
+  </app-deck-tile>
+</div>

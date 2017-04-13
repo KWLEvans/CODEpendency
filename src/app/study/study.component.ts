@@ -35,6 +35,7 @@ export class StudyComponent implements OnInit {
   currentUser;
   deckIds: string[] = [];
   decks;
+  showDecks: boolean = false;
 
   constructor(private route: ActivatedRoute, private location: Location, private questionService: QuestionService, private authService: AuthService, private userService: UserService, private deckService: DeckService, private router: Router) {
     this.authService.af.auth.subscribe(
