@@ -21,6 +21,8 @@ export class YourDecksComponent implements OnInit {
   user_displayName;
   isLoggedIn;
   currentUser;
+  deckss = [];
+  displayDeckss = [];
   userDecks: Deck [] = [];
   displayDecks: Deck [] = [];
 
@@ -46,16 +48,18 @@ export class YourDecksComponent implements OnInit {
   ngOnInit() {
     this.deckService.getDecks().subscribe( deckArray => {
       deckArray.forEach(deck => {
-        let currentDeck = new Deck(deck.name, deck.author)
-          this.userDecks.push(currentDeck);
+          this.deckss.push(deck);
       });
     });
-    this.userDecks.forEach(deck => {
-        if(deck.author == this.user_displayName){
-          this.displayDecks.push(deck);
+    this.deckss.forEach(deck => {
+        if(deck.author === this.user_displayName){
+          this.displayDeckss.push(deck);
         }
     });
-    console.log(this.userDecks)
+  }
+
+  goToDeck(deckId: string) {
+    this.router.navigate(['decks', deckId]);
   }
 
 
