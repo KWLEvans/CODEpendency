@@ -1,6 +1,6 @@
 <div id="study-logo">
   <img routerLink="study/General" src="./../assets/{{imageLink}}.png" alt="general logo" class="icon"  [ngClass]="{'drupal-icon': imageLink === 'drupal'}" (click)="selectedDeck=''">
-  <p><span *ngIf="!selectedDeck">All {{filter}} Questions</span><span *ngIf="selectedDeck">Questions from {{(selectedDeck | async)?.name}}</span></p>
+  <p id="header-text"><span *ngIf="!selectedDeck">All {{filter}} Questions</span><span *ngIf="selectedDeck">Questions from {{(selectedDeck | async)?.name}}</span></p>
 </div>
 
 <hr>
@@ -11,5 +11,7 @@
 
 <app-flash-card *ngIf="selectedQuestion" [question]="selectedQuestion" (answeredSender)="answerQuestion($event)"></app-flash-card>
 
+<h5>Other decks in {{filter}}: </h5>
+<hr id="more-decks-hr">
 <app-deck-tile *ngFor="let deck of decks | async | filterByTag:deckIds" [deck]="deck" (deckSelector)="selectDeck($event);randomQuestion();">
 </app-deck-tile>

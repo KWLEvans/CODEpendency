@@ -31,3 +31,20 @@ button {
 button:hover {
   background: rgba(255,255,255,0.1);
 }
+
+.icon {
+  height: 150px;
+  width: 150px;
+  border-radius: 50%;
+  border: 2px solid white;
+  background-color: white;
+  margin-top: -35px;
+}
+
+#header-text {
+    color: white;
+    font-size: 2.5em;
+    font-family: 'Montserrat', sans-serif;
+    letter-spacing: 3px;
+    margin-top: 10px;
+}

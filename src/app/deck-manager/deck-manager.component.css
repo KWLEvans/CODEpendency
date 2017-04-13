@@ -1,21 +1,3 @@
-.icon {
-  height: 200px;
-  width: 200px;
-  border-radius: 50%;
-  border: 2px solid white;
-  background-color: white;
-  margin-top: -35px;
-}
-
-p {
-  color: white;
-  padding-top: 10px;
-  font-size: 2.5em;
-  font-family: 'Montserrat', sans-serif;
-  letter-spacing: 3px;
-  margin-top: 20px;
-}
-
 #key-logo {
   text-align: center;
 }

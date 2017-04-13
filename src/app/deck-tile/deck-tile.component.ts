@@ -25,9 +25,9 @@ export class DeckTileComponent implements OnInit {
 
   setSize() {
     if (this.deck.name.length > 20) {
-      this.fontSize = 25;
+      this.fontSize = 20;
     } else {
-      this.fontSize = 30;
+      this.fontSize = 25;
     }
     console.log(this.fontSize);
   }

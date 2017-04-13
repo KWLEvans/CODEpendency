@@ -1,6 +1,6 @@
 <div id="user-decks">
-  <img src="./../../assets/user-decks.png" alt="user-decks"/>
-  <h1>{{user_displayName}}'s Decks</h1>
+  <img src="./../assets/user-decks.png" alt="user-decks" class="icon">
+  <p id="header-text">{{user_displayName}}'s Decks</p>
 </div>
 <hr>
 <app-deck-tile class="user-decks" (click)="goToDeck(deck.$key)" *ngFor="let deck of decks | async | filterByAuthor:user_displayName" [deck]="deck"></app-deck-tile>

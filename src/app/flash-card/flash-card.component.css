@@ -3,6 +3,7 @@
 .flip-container {
 	perspective: 1000px;
 	margin: auto;
+	margin-top: 40px;
 }
 	/* flip the pane when hovered */
 .flip-container.hover .flipper {
@@ -11,25 +12,27 @@
 }
 
 .flip-container, .front, .back {
-	width: 520px;
+	width: 540px;
 	height: 400px;
+	border-radius: 15px;
 }
 
 .front {
-	border: 3px solid #d64949;
-	border-radius: 5px;
+	border: 8px double #2F4F4F;
+	border-radius: 15px;
+	box-shadow: 8px 8px 2px grey;
 }
 
 .back {
-	border: 3px solid #d64949;
-	border-radius: 5px;
+	border: 8px double #2F4F4F;
+	border-radius: 15px;
+	box-shadow: 8px 8px 2px grey;
 }
 
 /* flip speed goes here */
 .flipper {
 	transition: 0.6s;
 	transform-style: preserve-3d;
-
 	position: relative;
 }
 
@@ -61,6 +64,7 @@
 
 .front div, .back div {
 	width: 100%;
+	padding: 15px;
 }
 
 h2 {
@@ -73,4 +77,35 @@ h2 {
 #buttons-div {
 	margin-top: 30px;
 	text-align: center;
+	margin-bottom: 50px;
+}
+
+.bad-font {
+	font-family: 'Condiment', cursive;
+	position: absolute;
+	top: 10px;
+	left: 20px;
+	font-size: 10em;
+}
+
+.btn-yes {
+  color: #f45c42;
+  background: rgba(0,0,0,0);
+  border: solid 3px #f45c42;
+  border-radius: 3px;
+  height: 40px;
+  width: auto;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+.btn-no {
+  color: #41f48f;
+  background: rgba(0,0,0,0);
+  border: solid 3px #41f48f;
+  border-radius: 3px;
+  height: 40px;
+  width: auto;
+  padding-left: 15px;
+  padding-right: 15px;
 }
