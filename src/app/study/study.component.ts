@@ -192,11 +192,11 @@ export class StudyComponent implements OnInit {
   getUser(){
   }
 
-  addQuestionToUser(responseValue)
-  {
+  addQuestionToUser(responseValue){
     let userQuestions = this.currentUser.questionsAnswered;
     let questionFound = false;
     let weight = 2;
+    
     if(userQuestions){
       for(let i = 0; i < userQuestions.length; i++){
         if(userQuestions[i][0] === this.selectedQuestion.text){
