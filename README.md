@@ -4,7 +4,7 @@ CODEpendency is a fun and engaging platform that was developed to help Epicodus 
 
 4/10/17 - 4/13/17
 
-CODEpendency is hosted at [CODEpendency](https://ptfc-dbccf.firebaseapp.com/)
+CODEpendency is hosted at [CODEpendency](https://codependency-45156.firebaseapp.com)
 
 ## To run CODEpendency from a personal computer:
 
@@ -16,9 +16,43 @@ You will need the following properly installed on your computer.
 * [Angular CLI](https://ember-cli.com/)
 * [Bower](https://bower.io/)
 
-## Development server
+## Installation
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+**Step 1**: Clone this repository to your local computer
+
+```console
+git clone https://github.com/KWLEvans/breakfast-club
+```
+
+**Step 2**: Install all development and production dependencies from the project root directory
+
+```console
+npm install
+```
+```console
+bower install
+```
+
+**Step 3**: Create a new file named `api-keys.ts` in the `src/app` directory to include your firebase information in the following format:
+
+```js
+  export var masterFirebaseConfig = {
+    apiKey: "xxxx",
+    authDomain: "xxxx.firebaseapp.com",
+    databaseURL: "https://xxxx.firebaseio.com",
+    storageBucket: "xxxx.appspot.com",
+    messagingSenderId: "xxxx"
+  };
+```
+
+**Step 4**: Use Angular-CLI to run a local server instance
+
+```console
+ng serve
+```
+
+**Step 5**: Visit the app at [http://localhost:4200](http://localhost:4200).
+
 
 ## Planning
 
