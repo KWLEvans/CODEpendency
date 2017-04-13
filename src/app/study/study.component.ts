@@ -72,15 +72,12 @@ export class StudyComponent implements OnInit {
       this.userService.getUserByUId(this.authService.currentUserId).subscribe(returnedUser => {
         this.currentUser = returnedUser[0];
         if(this.currentUser){
-          console.log(this.currentUser);
         } else {
           let emptyArray = [["vacant question", 0]];
           let newUser = new User(this.authService.currentUserId, emptyArray);
-          console.log("new user" + newUser);
           this.userService.saveUser(newUser);
           this.userService.getUserByUId(this.authService.currentUserId).subscribe(returnedUser =>{
             this.currentUser = returnedUser;
-            console.log(this.currentUser);
           });
         };
       });
@@ -142,7 +139,6 @@ export class StudyComponent implements OnInit {
   randomQuestion() {
     let possibleQuestion;
     let randomIndex;
-    console.log(this.questions);
     if (this.deckQuestions.length > 0)
     {
       randomIndex = Math.floor(this.deckQuestions.length * Math.random());
@@ -163,8 +159,6 @@ export class StudyComponent implements OnInit {
             let randomizer = Math.floor(4 * Math.random());
             if(randomizer <= chooseQuestion){
               questionChosen = true;
-            } else {
-              console.log("question not chosen");
             }
           }
         }
@@ -185,7 +179,6 @@ export class StudyComponent implements OnInit {
   answerQuestion(value: boolean) {
     this.addQuestionToUser(value);
     // This is where weighting and sorting answers can happen in the future
-    console.log(value);
     this.randomQuestion();
   }
 
@@ -196,7 +189,7 @@ export class StudyComponent implements OnInit {
     let userQuestions = this.currentUser.questionsAnswered;
     let questionFound = false;
     let weight = 2;
-    
+
     if(userQuestions){
       for(let i = 0; i < userQuestions.length; i++){
         if(userQuestions[i][0] === this.selectedQuestion.text){
