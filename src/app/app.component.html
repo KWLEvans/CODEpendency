@@ -8,7 +8,7 @@
         <span class="navbar-brand">|</span>
         <a class="navbar-brand" routerLink="new-deck">New Deck</a>
         <div class="nav-right">
-          <span class="navbar-brand">{{user_displayName}}</span>
+          <span class="navbar-brand" routerLink="your-decks">{{user_displayName}}</span>
           <a class="navbar-brand">|</a>
           <a class="navbar-brand" (click)="logout()" id="log-out">Log out</a>
         </div>
