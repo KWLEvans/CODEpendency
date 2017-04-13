@@ -23,6 +23,8 @@ import { Router } from '@angular/router';
 })
 export class StudyComponent implements OnInit {
   filter: string;
+  imageLink: string;
+  selectedDeck;
   questions: Question[] = [];
   deckQuestions: Question[] =[];
   selectedQuestion: Question;
@@ -55,6 +57,9 @@ export class StudyComponent implements OnInit {
     this.route.params.forEach(urlParameters => {
       this.filter = urlParameters['filter'];
     });
+
+    this.selectImageLink();
+
     this.questionService.getQuestions().subscribe(questionArray => {
       questionArray.forEach(question => {
         let newQuestion = new Question(question.text, question.deck, question.tags, question.answer, question.authorId);
@@ -88,7 +93,43 @@ export class StudyComponent implements OnInit {
     });
   }
 
+  selectImageLink() {
+    switch(this.filter) {
+      case "General":
+        this.imageLink = "general";
+        break;
+      case "HTML":
+        this.imageLink = "html";
+        break;
+      case "CSS":
+        this.imageLink = "css";
+        break;
+      case "JavaScript":
+        this.imageLink = "js";
+        break;
+      case "Angular.js":
+        this.imageLink = "angular";
+        break;
+      case "Ember.js":
+        this.imageLink = "ember";
+        break;
+      case "PHP":
+        this.imageLink = "php";
+        break;
+      case "Silex":
+        this.imageLink = "silex";
+        break;
+      case "SQL":
+        this.imageLink = "sql";
+        break;
+      case "Drupal":
+        this.imageLink = "drupal";
+        break;
+    }
+  }
+
   selectDeck(deckId: string) {
+    this.selectedDeck = this.deckService.getDeckById(deckId);
     let newQuestions: Question[] = [];
     this.questions.forEach(question => {
       if (question.deck === deckId) {
@@ -100,37 +141,27 @@ export class StudyComponent implements OnInit {
 
   randomQuestion() {
     let possibleQuestion;
-    let randomIndex
+    let randomIndex;
     console.log(this.questions);
     if (this.deckQuestions.length > 0)
     {
-      console.log('hi i am a deck');
-      console.log(this.deckQuestions);
       randomIndex = Math.floor(this.deckQuestions.length * Math.random());
       possibleQuestion = this.deckQuestions[randomIndex];
     } else {
-      console.log('hi i am not a deck');
       randomIndex = Math.floor(this.questions.length * Math.random());
-      console.log(randomIndex);
       possibleQuestion = this.questions[randomIndex];
-      console.log(possibleQuestion);
     }
     let userQuestions = this.currentUser.questionsAnswered;
     let questionChosen = false;
     let questionFound = false;
-    console.log(possibleQuestion);
     if(possibleQuestion){
       if(userQuestions){
         for(let i = 0; i < userQuestions.length; i++){
           if (possibleQuestion.text === userQuestions[i][0]){
-            console.log("question previously asked");
             questionFound = true;
             let chooseQuestion = userQuestions[i][1];
             let randomizer = Math.floor(4 * Math.random());
-            console.log("Chosen Question Weight:" + chooseQuestion);
-            console.log("Randomizer Weight:" + randomizer);
             if(randomizer <= chooseQuestion){
-              console.log("question chosen");
               questionChosen = true;
             } else {
               console.log("question not chosen");
@@ -141,10 +172,8 @@ export class StudyComponent implements OnInit {
       if(questionChosen === true) {
         this.selectedQuestion = possibleQuestion;
       } else if(questionFound === false) {
-        console.log("user has not previously answered this q");
         this.selectedQuestion = possibleQuestion;
       } else {
-        console.log("re-randomizing question");
         this.randomQuestion();
       }
       } else {
@@ -167,11 +196,10 @@ export class StudyComponent implements OnInit {
     let userQuestions = this.currentUser.questionsAnswered;
     let questionFound = false;
     let weight = 2;
-    if(userQuestions) {
-      console.log(this.selectedQuestion.text);
+    
+    if(userQuestions){
       for(let i = 0; i < userQuestions.length; i++){
         if(userQuestions[i][0] === this.selectedQuestion.text){
-          console.log("previously answered question found at" + i);
           if(responseValue === false && userQuestions[i][1] > 5){
             userQuestions[i][1]++;
             questionFound = true;
@@ -183,9 +211,7 @@ export class StudyComponent implements OnInit {
       };
     }
     if(questionFound === false){
-      console.log("Question not previously answered.");
       if(this.currentUser){
-        console.log(this.currentUser);
         this.currentUser.questionsAnswered.push([this.selectedQuestion.text, weight]);
         this.userService.addQuestion(this.currentUser);
       }
