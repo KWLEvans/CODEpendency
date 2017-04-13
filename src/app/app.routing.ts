@@ -6,6 +6,7 @@ import { NewDeckComponent } from './new-deck/new-deck.component';
 import { DeckManagerComponent } from './deck-manager/deck-manager.component';
 import { StudyComponent } from './study/study.component';
 import { LoginPageComponent } from './login-page/login-page.component';
+import { YourDecksComponent } from './your-decks/your-decks.component';
 
 const appRoutes: Routes = [
   {
@@ -27,6 +28,10 @@ const appRoutes: Routes = [
   {
     path: 'study/:filter',
     component: StudyComponent
+  },
+  {
+    path: 'your-decks',
+    component: YourDecksComponent
   }
 ];
 

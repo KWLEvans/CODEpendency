@@ -14,16 +14,15 @@ import { AuthService } from './../providers/auth.service';
 export class NewDeckComponent implements OnInit {
   deck: Deck;
   deckAuthor: string;
+
   constructor (private deckService: DeckService, private authService: AuthService,  private router: Router) {
     this.authService.af.auth.subscribe(
       (auth) => {
-        if (auth == null) {
+        if (auth === null) {
           this.router.navigate(['login']);
           this.deckAuthor = null;
-          this.authService.currentUserId = null;
         } else {
           this.deckAuthor = auth.google.displayName;
-          this.authService.currentUserId = auth.uid;
         }
       }
     );
@@ -31,12 +30,11 @@ export class NewDeckComponent implements OnInit {
 
 
   ngOnInit() {
-
-    //Replace "Sean" any author name you'd like
-    this.deck = new Deck("", this.deckAuthor);
+    this.deck = new Deck("", "");
   }
 
   submitForm(newDeck: Deck) {
+    newDeck.author = this.deckAuthor;
     let deckId = this.deckService.saveDeck(newDeck);
     this.router.navigate(['decks', deckId]);
   }
