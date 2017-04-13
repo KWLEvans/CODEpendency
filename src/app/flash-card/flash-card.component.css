@@ -17,7 +17,12 @@
 
 .front {
 	border: 3px solid #d64949;
-	border-radius: 3px;
+	border-radius: 5px;
+}
+
+.back {
+	border: 3px solid #d64949;
+	border-radius: 5px;
 }
 
 /* flip speed goes here */
