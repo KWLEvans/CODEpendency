@@ -2,21 +2,14 @@
   <img routerLink="study/General" src="./../assets/{{imageLink}}.png" alt="general logo" class="icon"  [ngClass]="{'drupal-icon': imageLink === 'drupal'}" (click)="selectedDeck=''">
   <p><span *ngIf="!selectedDeck">All {{filter}} Questions</span><span *ngIf="selectedDeck">Questions from {{(selectedDeck | async)?.name}}</span></p>
 </div>
+
 <hr>
+
 <div class="button-random" *ngIf="!selectedQuestion">
   <button (click)="randomQuestion()" class="custom-button">Start</button>
 </div>
 
 <app-flash-card *ngIf="selectedQuestion" [question]="selectedQuestion" (answeredSender)="answerQuestion($event)"></app-flash-card>
-<div *ngFor="let deck of decks | async | filterByTag:deckIds">
 
-  <div (click)="selectDeck(deck.$key);randomQuestion();" class="deck-badge col-xs-3">
-    <div class="badge-title">
-      <h3>{{deck.name}}</h3>
-    </div>
-    <hr>
-    <div class="badge-author">
-      <small>By: {{deck.author}}</small>
-    </div>
-  </div>
-</div>
+<app-deck-tile *ngFor="let deck of decks | async | filterByTag:deckIds" [deck]="deck" (deckSelector)="selectDeck($event);randomQuestion();">
+</app-deck-tile>

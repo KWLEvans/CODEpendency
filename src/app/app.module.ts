@@ -21,6 +21,7 @@ import { LoginPageComponent } from './login-page/login-page.component';
 import { FilterByTagPipe } from './filter-by-tag.pipe';
 import { YourDecksComponent } from './your-decks/your-decks.component';
 import { FilterByAuthorPipe } from './filter-by-author.pipe';
+import { DeckTileComponent } from './deck-tile/deck-tile.component';
 
 export const firebaseConfig = {
   apiKey: masterFirebaseConfig.apiKey,
@@ -44,7 +45,8 @@ export const firebaseConfig = {
     LoginPageComponent,
     FilterByTagPipe,
     YourDecksComponent,
-    FilterByAuthorPipe
+    FilterByAuthorPipe,
+    DeckTileComponent
   ],
   imports: [
     BrowserModule,
