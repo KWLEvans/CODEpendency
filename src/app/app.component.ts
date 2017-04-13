@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
 export class AppComponent {
   title = 'app works!';
   private isLoggedIn: Boolean;
-  private user_displayName: String;
+  public user_displayName: String;
   private user_email: String;
 
   constructor(public authService: AuthService, private router: Router) {
