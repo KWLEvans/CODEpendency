@@ -1,67 +1,42 @@
 import { Component, OnInit } from '@angular/core';
-import { AngularFire, FirebaseObjectObservable, FirebaseListObservable } from 'angularfire2';
-import { ActivatedRoute, Params } from '@angular/router';
-import { Location } from '@angular/common';
 import { Router } from '@angular/router';
 
 import { AuthService } from './../providers/auth.service';
 import { Deck } from './../deck.model';
 import { DeckService } from './../deck.service';
-import { Question } from './../question.model';
-import { QuestionService } from './../question.service';
+import { FilterByAuthorPipe } from './../filter-by-author.pipe';
 
 @Component({
   selector: 'app-your-decks',
   templateUrl: './your-decks.component.html',
   styleUrls: ['./your-decks.component.css'],
-  providers: [ DeckService, AuthService, QuestionService ]
+  providers: [ DeckService, AuthService ]
 })
 export class YourDecksComponent implements OnInit {
 
   user_displayName;
-  isLoggedIn;
-  currentUser;
-  deckss = [];
-  displayDeckss = [];
-  userDecks: Deck [] = [];
-  displayDecks: Deck [] = [];
+  isLoggedIn: boolean;
+  decks;
 
-  constructor(private deckService: DeckService, private authService: AuthService,  private router: Router, private questionService: QuestionService) {
+  constructor(private deckService: DeckService, private authService: AuthService, private router: Router) {
     this.authService.af.auth.subscribe(
       (auth) => {
-        if (auth == null) {
+        if (auth === null) {
           this.isLoggedIn = false;
           this.user_displayName = '';
-          this.authService.currentUserName = null;
-          this.authService.currentUserId = null;
         } else {
           this.isLoggedIn = true;
           this.user_displayName = auth.google.displayName;
-          this.authService.currentUserName = auth.google.displayName;
-          this.authService.currentUserId = auth.uid;
         }
       }
     );
   }
 
-
   ngOnInit() {
-    this.deckService.getDecks().subscribe( deckArray => {
-      deckArray.forEach(deck => {
-          this.deckss.push(deck);
-      });
-    });
-    this.deckss.forEach(deck => {
-        if(deck.author === this.user_displayName){
-          this.displayDeckss.push(deck);
-        }
-    });
+    this.decks = this.deckService.getDecks();
   }
 
   goToDeck(deckId: string) {
-    this.router.navigate(['decks', deckId]);
+    this.router.navigate(["decks/", deckId]);
   }
-
-
-
 }

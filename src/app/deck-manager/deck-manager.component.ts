@@ -33,10 +33,10 @@ export class DeckManagerComponent implements OnInit {
     this.questions = this.questionService.getQuestions();
   }
 
-  startDeletingDeck(deck) {
-    this.questionService.purgeByDeckId(deck.$key);
-    this.deckService.deleteDeck(deck.$key);
-    this.router.navigate(['']);
+  startDeletingDeck(deckId) {
+    this.questionService.purgeByDeckId(deckId);
+    this.deckService.deleteDeck(deckId);
+    this.router.navigate(['your-decks']);
   }
 
 }
