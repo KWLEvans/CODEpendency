@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AngularFire, FirebaseObjectObservable, FirebaseListObservable } from 'angularfire2';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Location } from '@angular/common';
+import { Router } from '@angular/router';
 
 import { Deck } from './../deck.model';
 import { DeckService } from './../deck.service';
@@ -20,8 +21,9 @@ export class DeckManagerComponent implements OnInit {
   deck: FirebaseObjectObservable<any>;
   questions: FirebaseListObservable<any[]>;
   editDeck: boolean = false;
+  deleteDeck: boolean = false;
 
-  constructor(private deckService: DeckService, private questionService: QuestionService, private route: ActivatedRoute, private location: Location) { }
+  constructor(private deckService: DeckService, private questionService: QuestionService, private route: ActivatedRoute, private location: Location, private router: Router) { }
 
   ngOnInit() {
     this.route.params.forEach(urlParameters => {
@@ -29,6 +31,12 @@ export class DeckManagerComponent implements OnInit {
     });
     this.deck = this.deckService.getDeckById(this.deckId);
     this.questions = this.questionService.getQuestions();
+  }
+
+  startDeletingDeck(deck) {
+    this.questionService.purgeByDeckId(deck.$key);
+    this.deckService.deleteDeck(deck.$key);
+    this.router.navigate(['']);
   }
 
 }

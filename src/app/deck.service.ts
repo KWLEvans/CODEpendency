@@ -22,4 +22,8 @@ export class DeckService {
     let newRef = this.decks.push(deck);
     return newRef.key;
   }
+
+  deleteDeck(deckId: string) {
+    this.getDeckById(deckId).remove();
+  }
 }
