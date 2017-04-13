@@ -1,6 +1,6 @@
 # CODEpendency
 
-CODEpendency is a fun and engaging study platform that was developed to help Epicodus students prepare for technical interviews.
+CODEpendency is a fun and engaging platform that was developed to help Epicodus students prepare for technical interviews.
 
 4/10/17 - 4/13/17
 
