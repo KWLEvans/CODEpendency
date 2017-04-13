@@ -30,4 +30,18 @@ export class QuestionService {
       answer: questionUpdater.answer
     });
   }
+
+  deleteQuestion(questionId: string) {
+    this.getQuestionById(questionId).remove();
+  }
+
+  purgeByDeckId(deckId: string) {
+    this.getQuestions().subscribe(questionArray => {
+      questionArray.forEach(question => {
+        if (question.deck === deckId) {
+          this.deleteQuestion(question.$key);
+        }
+      });
+    });
+  }
 }

@@ -1,38 +1,42 @@
 import { Component, OnInit } from '@angular/core';
-import { AngularFire, FirebaseObjectObservable, FirebaseListObservable } from 'angularfire2';
-import { ActivatedRoute, Params } from '@angular/router';
-import { Location } from '@angular/common';
 import { Router } from '@angular/router';
 
 import { AuthService } from './../providers/auth.service';
 import { Deck } from './../deck.model';
 import { DeckService } from './../deck.service';
-import { Question } from './../question.model';
-import { QuestionService } from './../question.service';
+import { FilterByAuthorPipe } from './../filter-by-author.pipe';
 
 @Component({
   selector: 'app-your-decks',
   templateUrl: './your-decks.component.html',
   styleUrls: ['./your-decks.component.css'],
-  providers: [ DeckService, AuthService, QuestionService ]
+  providers: [ DeckService, AuthService ]
 })
 export class YourDecksComponent implements OnInit {
 
-  constructor(private deckService: DeckService, private authService: AuthService,  private router: Router, private questionService: QuestionService) { }
-
-  loggedInUser: string;
+  user_displayName;
+  isLoggedIn: boolean;
   decks;
-  userDecks: Deck [] = [];
 
-  ngOnInit() {
-    this.deckService.getDecks().subscribe(deckArray => {
-      deckArray.forEach(deck => {
-        let currentDeck = new Deck(deck.name, deck.author);
-        this.userDecks.push(currentDeck);
-      });
-    });
+  constructor(private deckService: DeckService, private authService: AuthService, private router: Router) {
+    this.authService.af.auth.subscribe(
+      (auth) => {
+        if (auth === null) {
+          this.isLoggedIn = false;
+          this.user_displayName = '';
+        } else {
+          this.isLoggedIn = true;
+          this.user_displayName = auth.google.displayName;
+        }
+      }
+    );
   }
 
+  ngOnInit() {
+    this.decks = this.deckService.getDecks();
+  }
 
-
+  goToDeck(deckId: string) {
+    this.router.navigate(["decks/", deckId]);
+  }
 }

@@ -27,16 +27,13 @@ export class QuestionFormComponent implements OnInit {
   constructor(private questionService: QuestionService, private authService: AuthService, private router: Router, private deckService: DeckService) {  }
 
   ngOnInit() {
-
     this.authService.af.auth.subscribe(
       (auth) => {
-        if (auth == null) {
+        if (auth === null) {
           this.router.navigate(['login']);
           this.deckAuthor = null;
-          this.authService.currentUserId = null;
         } else {
           this.deckAuthor = auth.google.displayName;
-          this.authService.currentUserId = auth.uid;
         }
       }
     );
@@ -65,22 +62,13 @@ export class QuestionFormComponent implements OnInit {
   }
 
   submitForm(question) {
-
-    this.deckService.getDeckById(this.deckId).subscribe(returnedDeck => {
-      this.currentDeck = returnedDeck;
-    });
-    if(this.currentDeck.author === this.deckAuthor)
-    {
-      if (this.questionToEdit) {
-        this.questionService.updateQuestion(question);
-      } else {
-        question.deck = this.deckId;
-        question.authorId = this.deckAuthor;
-        this.questionService.saveQuestion(question);
-      }
-      this.question = new Question("", "", [], "");
+    if (this.questionToEdit) {
+      this.questionService.updateQuestion(question);
     } else {
-      alert("deck author does not match currently logged author");
+      question.deck = this.deckId;
+      question.authorId = this.deckAuthor;
+      this.questionService.saveQuestion(question);
     }
+    this.question = new Question("", "", [], "");
   }
 }
