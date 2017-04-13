@@ -34,6 +34,12 @@ export class DeckManagerComponent implements OnInit {
     this.questions = this.questionService.getQuestions();
   }
 
+  editQuestion(questionId: string) {
+    this.questionService.getQuestionById(questionId).subscribe(question => {
+      this.questionToEdit = new Question(question.text, question.deck, question.tags, question.answer, question.authorId);
+    });
+  }
+
   startDeletingDeck(deckId) {
     this.questionService.purgeByDeckId(deckId);
     this.deckService.deleteDeck(deckId);

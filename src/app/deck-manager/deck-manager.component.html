@@ -10,9 +10,12 @@
 </div>
 <hr>
 
-<app-question-form [deckId]="(deck | async)?.$key"></app-question-form>
+<app-question-form *ngIf="!questionToEdit" [deckId]="(deck | async)?.$key"></app-question-form>
+
+<app-question-form *ngIf="questionToEdit" [questionToEdit]="questionToEdit"></app-question-form>
+
 <div *ngIf="questions" id="questions">
   <h3>Questions:</h3>
   <hr>
-  <app-question-tile *ngFor="let question of questions | async | deckId:deckId" [question]="question"></app-question-tile>
+  <app-question-tile *ngFor="let question of questions | async | deckId:deckId" [question]="question" (editSender)="editQuestion($event)"></app-question-tile>
 </div>
