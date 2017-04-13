@@ -1,6 +1,6 @@
 <div id="study-logo">
-  <img routerLink="study/General" src="./../assets/{{imageLink}}.png" alt="general logo" class="icon"  [ngClass]="{'drupal-icon': imageLink === 'drupal'}" (click)="selectedDeck=''">
-  <p id="header-text"><span *ngIf="!selectedDeck">All {{filter}} Questions</span><span *ngIf="selectedDeck">Questions from {{(selectedDeck | async)?.name}}</span></p>
+  <img src="./../assets/{{imageLink}}.png" alt="general logo" class="icon"  [ngClass]="{'drupal-icon': imageLink === 'drupal'}" (click)="selectedDeck=''">
+  <p><span *ngIf="!selectedDeck">All {{filter}} Questions</span><span *ngIf="selectedDeck">Questions from {{(selectedDeck | async)?.name}}</span></p>
 </div>
 
 <hr>
