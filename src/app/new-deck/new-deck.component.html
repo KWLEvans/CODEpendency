@@ -6,7 +6,7 @@
 
 <form (ngSubmit)="submitForm(deck)" #deckForm="ngForm">
   <label for="name">Deck Name:</label>
-  <input [(ngModel)]="deck.name" #name="ngModel" id="name" name="name" class="form-control" required>
+  <input [(ngModel)]="deck.name" #name="ngModel" id="name" name="name" class="form-control" required maxlength="50">
   <div [hidden]="name.valid" class="alert alert-danger">
     A name is required
   </div>

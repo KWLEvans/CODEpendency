@@ -11,7 +11,8 @@
 <hr>
 
 <app-question-form [deckId]="(deck | async)?.$key"></app-question-form>
-<div *ngIf="questions">
+<div *ngIf="questions" id="questions">
   <h3>Questions:</h3>
+  <hr>
   <app-question-tile *ngFor="let question of questions | async | deckId:deckId" [question]="question"></app-question-tile>
 </div>

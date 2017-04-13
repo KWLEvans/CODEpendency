@@ -1,0 +1,11 @@
+.alert {
+  width: 50%;
+  height: 50%;
+}
+
+.panel {
+  background: rgba(60, 60, 60, 0.5);
+  margin: 30px;
+  border: 4px double grey;
+  padding: 20px;
+}

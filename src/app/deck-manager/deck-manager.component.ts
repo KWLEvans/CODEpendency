@@ -22,6 +22,7 @@ export class DeckManagerComponent implements OnInit {
   questions: FirebaseListObservable<any[]>;
   editDeck: boolean = false;
   deleteDeck: boolean = false;
+  questionToEdit;
 
   constructor(private deckService: DeckService, private questionService: QuestionService, private route: ActivatedRoute, private location: Location, private router: Router) { }
 

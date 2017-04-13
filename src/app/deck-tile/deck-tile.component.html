@@ -1,9 +1,10 @@
-<div (click)="selectDeck(deck.$key)" class="deck-badge col-xs-3">
-  <div class="badge-title">
-    <h3>{{deck.name}}</h3>
-  </div>
-  <hr>
-  <div class="badge-author">
-    <small>By: {{deck.author}}</small>
+<div class="col-xs-6">
+  <div (click)="selectDeck(deck.$key)" class="deck-badge">
+    <div class="badge-title">
+      <h3 [ngStyle]="{'font-size.px':fontSize}">{{deck.name}}</h3>
+    </div>
+    <div *ngIf="currentRoute !== '/your-decks'" class="badge-author">
+      <small>By: {{deck.author}}</small>
+    </div>
   </div>
 </div>

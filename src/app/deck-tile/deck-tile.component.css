@@ -1,16 +1,25 @@
 .deck-badge {
-  height: 200px;
-  margin: 30px;
-  border: 3px solid red;
-  background-color: rgba(255,255,255,0.2);
-  border-radius: 5px;
+  width: 400px;
+  height: 96px;
+  background-color: rgba(220, 220, 220, 0.1);;
+  border-radius: 10px;
+  background-image: url("./../../assets/badge_white.svg");
+  background-size: cover;
+  font-family: 'Montserrat', sans-serif;
+  padding: 0px;
+  margin: auto;
+  margin-bottom: 20px;
 }
 
 .badge-title {
-  height: 100px;
+  height: 96px;
+  width: 275px;
+  margin-left: 105px;
+  margin-right: 0px;
+  padding-left: 10px;
+  padding-right: 10px;
   display: flex;
   align-items: center;
-  text-align: center;
 }
 
 .badge-author {
@@ -19,7 +28,6 @@
 
 h3 {
   color: white;
-  text-align: center;
-  margin-bottom: 30px;
   width: 100%;
+  margin: 0px;
 }

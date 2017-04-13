@@ -29,3 +29,7 @@ h1 {
   margin: auto;
   margin-top: 200px;
 }
+
+button {
+  background-color: rgba(0, 0, 0, 0.5);
+}

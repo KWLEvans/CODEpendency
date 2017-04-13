@@ -19,3 +19,8 @@ p {
 #key-logo {
   text-align: center;
 }
+
+#questions {
+  width: 100%;
+  color: white;
+}
